@@ -1,0 +1,157 @@
+.footer-section {
+  background-color: #1C1D20;
+  color: #aaa;
+  padding: 3rem 2rem;
+  border-top: 1px solid #333;
+}
+
+.footer-content {
+  max-width: 1170px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-left {
+  align-items: flex-start;
+}
+
+.footer-right {
+  align-items: flex-end;
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-social-icon {
+  color: #ccc;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social-icon:hover {
+  color: #fff;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.footer-link {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.footer-link:hover {
+  color: #fff;
+}
+
+.footer-subscribe {
+  display: flex;
+  border: 1px solid #444;
+}
+
+.footer-subscribe-input {
+  background-color: transparent;
+  border: none;
+  padding: 0.75rem 1rem;
+  color: #ccc;
+  font-size: 0.9rem;
+  outline: none;
+  flex-grow: 1;
+}
+
+.footer-subscribe-input::placeholder {
+  color: #777;
+}
+
+.footer-subscribe-button {
+  background-color: #CC0000;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.footer-subscribe-button:hover {
+  background-color: #AA0000;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  text-align: right;
+}
+
+.footer-copyright,
+.footer-credits {
+  font-size: 0.85rem;
+  margin: 0;
+  color: #888;
+}
+
+.footer-credits {
+  color: #aaa;
+}
+
+.footer-payment-icons {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.footer-payment-icon {
+  color: #777;
+  font-size: 1.8rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left,
+  .footer-right {
+    align-items: center;
+    width: 100%;
+  }
+  .footer-links {
+    align-items: center;
+  }
+  .footer-info,
+  .footer-right {
+    align-items: center;
+    text-align: center;
+  }
+  .footer-subscribe {
+    width: 80%;
+    max-width: 400px;
+  }
+}

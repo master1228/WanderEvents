@@ -1,0 +1,164 @@
+/* Main App Styles - Based on ogbuda.com */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --color-primary: #e50000; /* Red */
+  --color-secondary: #ffffff; /* White */
+  --color-dark: #000000; /* Black */
+  --color-red-gradient-start: #2e0000; /* Dark red for gradient */
+  --color-red-gradient-end: #000000; /* Black for gradient */
+  --color-dark-gray: #0c0c0c; /* Very dark background */
+  --color-medium-gray: #111111; /* Medium dark for cards */
+  --color-light-gray: #333333; /* Light dark for contrast */
+  --color-text: #ffffff; /* White text */
+  --color-text-secondary: #999999; /* Light gray text */
+  --color-accent: #00aaff; /* Bright blue accent */
+}
+
+body {
+  font-family: 'Roboto Mono', monospace, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
+  line-height: 1.6;
+  background-color: var(--color-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Container styles */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* App styles */
+.app {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+/* Main content styles */
+.main-content {
+  min-height: calc(100vh - 140px); /* Adjust based on header/footer height */
+  padding-top: 0; /* Removed padding to eliminate space */
+  background-color: transparent;
+}
+
+/* Section styles */
+.section {
+  padding: 60px 0;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #222;
+  }
+
+  &__subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+/* Button styles */
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  
+  &--primary {
+    background-color: #3498db;
+    color: white;
+    
+    &:hover {
+      background-color: #2980b9;
+    }
+  }
+  
+  &--secondary {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    
+    &:hover {
+      background-color: #e9ecef;
+    }
+  }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .section {
+    padding: 40px 0;
+    
+    &__title {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .section {
+    padding: 30px 0;
+    
+    &__title {
+      font-size: 1.8rem;
+    }
+  }
+}

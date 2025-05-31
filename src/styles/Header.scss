@@ -1,0 +1,121 @@
+/* Header Component Styles - Based on ogbuda.com */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 0.8rem 2rem;
+  max-width: 90%;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center; // Changed to center
+    gap: 2rem; // Keep or adjust as needed
+    width: 100%;
+  }
+  
+  &__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-secondary);
+      transition: color 0.3s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+  }
+  
+  &__nav {
+    // flex: 1; // Removed flex: 1
+    display: flex;
+    align-items: center;
+    
+    &-list {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    &-item {
+      position: relative;
+    }
+    
+    &-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      transition: color 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      
+      &:hover {
+        color: var(--color-secondary);
+      }
+    }
+  }
+  
+  /* Mobile menu button */
+  &__mobile-button {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
+  .header {
+    &__container {
+      max-width: 90%; // Reverted to simpler max-width adjustment
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    height: auto;
+
+    &__container {
+      width: auto;
+      justify-content: center;
+      gap: 0;
+      padding: 0;
+    }
+
+    &__brand-text {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    &__nav {
+      display: none !important;
+    }
+
+    &__mobile-button {
+      display: none !important;
+    }
+  }
+}
