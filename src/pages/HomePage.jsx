@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaMapMarkerAlt, FaClock, FaTicket, FaChevronDown } from 'react-icons/fa';
 import '../styles/HomePage.scss';
 import TicketModal from '../components/TicketModal';
-import { fetchEvents } from '../utils/api';
+import { fetchEvents, getStrapiBaseUrl } from '../utils/api';
 
 const HomePage = () => {
   const [events, setEvents] = useState([]);
@@ -22,9 +22,10 @@ const HomePage = () => {
             console.log(`Processing item[${index}]:`, item); // item УЖЕ должен быть объектом с атрибутами + id
 
             // Формируем URL для изображения
-            // Базовый URL Strapi (без /api)
-            const strapiBaseUrl = (process.env.REACT_APP_STRAPI_URL || 'http://localhost:1337/api').replace('/api', '');
-            const imageUrl = item.image && item.image.url ? `${strapiBaseUrl}${item.image.url}` : '';
+            const strapiBaseUrl = getStrapiBaseUrl();
+            const imageUrl = item.image && (item.image.url || item.image.formats?.thumbnail?.url)
+              ? `${strapiBaseUrl}${item.image.url || item.image.formats.thumbnail.url}`
+              : '';
             
             // Обработка описания (RichText) - пока просто возьмем как есть или первую строку
             let eventDescription = '';
@@ -57,7 +58,8 @@ const HomePage = () => {
                 type: t.type,
                 price: t.price,
                 description: t.description,
-                currency_symbol: t.currency_symbol // Добавляем символ валюты
+                currency_symbol: t.currency_symbol, // Добавляем символ валюты
+                purchase_url: t.purchase_url // Новое поле: ссылка на покупку
               })) : [],
               sold_out: false // Расширить схему позже
             };
@@ -104,7 +106,7 @@ const HomePage = () => {
               <h2 className="event-concert-title">{event.concertTitle}</h2>
               <div className="event-main-content">
                 <img
-                  src={event.posterImage.startsWith('http') ? event.posterImage : `${process.env.REACT_APP_STRAPI_URL?.replace('/api','') || ''}${event.posterImage}`}
+                  src={event.posterImage}
                   alt={event.venue}
                   className="event-poster"
                 />

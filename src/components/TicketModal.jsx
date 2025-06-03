@@ -47,7 +47,7 @@ const TicketModal = ({ isOpen, onClose, event }) => {
                   </div>
                   <button
                     className="select-ticket"
-                    onClick={() => window.open('https://t.me/wander_events_tickets', '_blank')}
+                    onClick={() => window.open(ticket.purchase_url || 'https://t.me/wander_events_tickets', '_blank')}
                   >
                     КУПИТЬ
                   </button>
