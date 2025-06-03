@@ -11,7 +11,7 @@ const REMOTE_API_TOKEN = process.env.REACT_APP_STRAPI_TOKEN || '';
 
 console.log('Strapi API configuration:', { LOCAL_API_URL, REMOTE_API_URL });
 
-let activeBaseUrl = null; // will store the base actually used for successful requests
+let activeBaseUrl = REMOTE_API_URL; // always use remote base in production
 
 async function attemptRequest(baseUrl, token, endpoint, method) {
   const res = await fetch(`${baseUrl}${endpoint}`, {
@@ -31,15 +31,9 @@ async function attemptRequest(baseUrl, token, endpoint, method) {
   return res.json();
 }
 
-// Automatically tries local first; if сеть/соединение неудачно, fallback к remote.
+// In production we hit only the remote Strapi with token
 export async function strapiFetch(endpoint, { method = 'GET' } = {}) {
-  try {
-    return await attemptRequest(LOCAL_API_URL, LOCAL_API_TOKEN, endpoint, method);
-  } catch (err) {
-    // Если local ✕, пробуем remote
-    console.warn('Local Strapi unreachable, falling back to remote:', err.message);
-    return attemptRequest(REMOTE_API_URL, REMOTE_API_TOKEN, endpoint, method);
-  }
+  return attemptRequest(REMOTE_API_URL, REMOTE_API_TOKEN, endpoint, method);
 }
 
 // Fetch events with all relations populated (image, tickets, etc.)
@@ -51,7 +45,6 @@ export async function fetchEvents() {
 // Additional helpers can be added later (e.g., fetchSingleEvent, purchaseTicket, etc.)
 
 export function getStrapiBaseUrl() {
-  // return base URL without trailing /api
-  const base = activeBaseUrl || LOCAL_API_URL || REMOTE_API_URL;
-  return base.replace(/\/api$/, '');
+  // always remote, strip trailing /api
+  return REMOTE_API_URL.replace(/\/api$/, '');
 }

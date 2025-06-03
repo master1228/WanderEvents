@@ -11,15 +11,15 @@ const Footer = () => {
         <div className="footer-left">
           <div className="footer-social-icons">
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram className="footer-social-icon" /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><FaTelegramPlane className="footer-social-icon" /></a>
+            <a href="https://t.me/wanderevents" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><FaTelegramPlane className="footer-social-icon" /></a>
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube className="footer-social-icon" /></a>
             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok className="footer-social-icon" /></a>
             {/* Добавьте другие иконки по необходимости */}
           </div>
           <div className="footer-links">
-            <a href="#" className="footer-link">Возврат билетов</a>
+            <a href="https://t.me/wander_events_tickets" target="_blank" rel="noopener noreferrer" className="footer-link">Возврат билетов</a>
             <a href="#" className="footer-link">Соглашение пользователя</a>
-            <a href="#" className="footer-link">Контакты</a>
+            <a href="https://t.me/wanderevents" target="_blank" rel="noopener noreferrer" className="footer-link">Контакты</a>
           </div>
         </div>
 
