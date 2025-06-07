@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaMapMarkerAlt, FaClock, FaTicket, FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 import '../styles/HomePage.scss';
 import TicketModal from '../components/TicketModal';
 import { fetchEvents, getStrapiBaseUrl } from '../utils/api';

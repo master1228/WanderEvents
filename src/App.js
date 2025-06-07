@@ -5,7 +5,6 @@ import HomePage from './pages/HomePage';
 import UserAgreement from './pages/UserAgreement';
 import Footer from './components/Footer'; // Added Footer component import
 import './styles/App.scss';
-import backgroundImage from './assets/images/background.png';
 
 function App() {
   return (
