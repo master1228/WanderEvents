@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaInstagram, FaTelegramPlane, FaYoutube, FaTiktok, FaCcVisa, FaCcMastercard } from 'react-icons/fa';
 import { SiGooglepay } from 'react-icons/si';
+import AgreementModal from './AgreementModal';
 import './Footer.css';
 
 const Footer = () => {
+  const [agreementOpen, setAgreementOpen] = useState(false);
+
   return (
     <footer id="contacts" className="footer-section">
       <div className="footer-content">
         {/* Левая колонка */}
         <div className="footer-left">
           <div className="footer-social-icons">
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram className="footer-social-icon" /></a>
+            <a href="https://www.instagram.com/wander_warsaw" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram className="footer-social-icon" /></a>
             <a href="https://t.me/wanderevents" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><FaTelegramPlane className="footer-social-icon" /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube className="footer-social-icon" /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok className="footer-social-icon" /></a>
+            <a href="https://www.youtube.com/@WanderEvents" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube className="footer-social-icon" /></a>
+            <a href="https://www.tiktok.com/@wandereventsofficial" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok className="footer-social-icon" /></a>
             {/* Добавьте другие иконки по необходимости */}
           </div>
           <div className="footer-links">
             <a href="https://t.me/wander_events_tickets" target="_blank" rel="noopener noreferrer" className="footer-link">Возврат билетов</a>
-            <a href="#" className="footer-link">Соглашение пользователя</a>
+            <button type="button" className="footer-link" onClick={() => setAgreementOpen(true)}>Соглашение пользователя</button>
             <a href="https://t.me/wanderevents" target="_blank" rel="noopener noreferrer" className="footer-link">Контакты</a>
           </div>
         </div>
@@ -45,6 +48,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <AgreementModal isOpen={agreementOpen} onClose={() => setAgreementOpen(false)} />
     </footer>
   );
 };

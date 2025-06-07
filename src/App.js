@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
+import UserAgreement from './pages/UserAgreement';
 import Footer from './components/Footer'; // Added Footer component import
 import './styles/App.scss';
 import backgroundImage from './assets/images/background.png';
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/store" element={<HomePage />} />
             <Route path="/contacts" element={<HomePage />} />
+            <Route path="/user-agreement" element={<UserAgreement />} />
           </Routes>
           <Footer />
         </main>

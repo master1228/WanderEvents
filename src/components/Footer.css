@@ -27,7 +27,12 @@
 }
 
 .footer-right {
-  align-items: flex-end;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-subscribe {
+  margin: 0 auto;
 }
 
 .footer-social-icons {
@@ -59,6 +64,10 @@
   font-size: 0.9rem;
   transition: color 0.3s ease;
   text-transform: uppercase;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .footer-link:hover {
@@ -68,6 +77,11 @@
 .footer-subscribe {
   display: flex;
   border: 1px solid #444;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 550px;
+  box-sizing: border-box;
 }
 
 .footer-subscribe-input {
@@ -124,11 +138,50 @@
   display: flex;
   gap: 0.8rem;
   margin-top: 0.5rem;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .footer-payment-icon {
   color: #777;
   font-size: 1.8rem;
+}
+
+@media (max-width: 808px) {
+  .footer-subscribe {
+    display: none;
+  }
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left,
+  .footer-right {
+    align-items: center;
+    width: 100%;
+  }
+  .footer-links {
+    align-items: center;
+  }
+  .footer-info,
+  .footer-right {
+    align-items: center;
+    text-align: center;
+  }
+  .footer-subscribe {
+    width: 80%;
+    max-width: 400px;
+  }
+  /* Increase left padding of email input for mobile */
+  .footer-subscribe-input {
+    padding-left: 20px;
+  }
+  /* Center payment icons on mobile */
+  .footer-payment-icons {
+    width: auto;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {

@@ -67,11 +67,11 @@ const HomePage = () => {
           setEvents(formatted);
         } else {
           console.error('Данные от API не в ожидаемом формате:', data);
-          setEvents([]); // Устанавливаем пустой массив, если данные некорректны
+          setEvents([]);
         }
       } catch (e) {
         console.error('Ошибка загрузки событий', e);
-        setEvents([]); // Устанавливаем пустой массив в случае ошибки
+        setEvents([]);
       } finally {
         setLoading(false);
       }
@@ -86,6 +86,12 @@ const HomePage = () => {
 
   const closeModal = () => setModalOpen(false);
 
+  // Scroll down to events section smoothly
+  const scrollToEvents = () => {
+    const section = document.getElementById('events');
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
+  };
+
   if (loading) {
     return <div className="home-page"><p style={{color: '#fff'}}>Загрузка...</p></div>;
   }
@@ -94,7 +100,7 @@ const HomePage = () => {
     <div className="home-page">
       <div className="events-container">
         <div className="artist-header">
-          <div className="scroll-indicator">
+          <div className="scroll-indicator" onClick={scrollToEvents} role="button">
             <div className="scroll-text">листай дальше</div>
             <FaChevronDown className="scroll-arrow" />
           </div>
@@ -113,7 +119,9 @@ const HomePage = () => {
                 <div className="event-middle-content">
                   <div className="event-city-date-time-wrapper"> {/* New wrapper */}
                     <div className="event-location-large">
-                      {event.city} <span className="dot-separator">•</span> {event.date}
+                      {event.city}
+                      <br className="mobile-break" />
+                      <span className="event-date"> {event.date}</span>
                     </div>
                     <div className="event-time-display">START - {event.time}</div>
                     <div className="event-venue-display">PLACE - VOODOO CLUB</div>

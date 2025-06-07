@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 // Установка заголовка страницы
-document.title = 'WanderEvents | События';
+document.title = 'WanderEvents - Лучшие музыкальные ивенты и фестивали';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

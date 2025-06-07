@@ -67,7 +67,7 @@
     transition: opacity 0.3s ease;
     cursor: pointer;
     position: absolute;
-    top: calc(70% + 50px); // Moved up by 50px from previous desktop position
+    top: 590px; // fixed distance 590px from top
     left: 0;
     right: 0;
     animation: bounce 2s infinite;
@@ -122,9 +122,9 @@
   .event-card {
     display: flex;
     flex-direction: column;
-    max-width: 1200px;
-    width: auto;
-    margin-bottom: 50px;
+    width: 100%;             // 20% wider than previous 90%
+    max-width: 1080px;       // increased cap for large screens
+    margin: 0 auto 50px;     // center horizontally and bottom spacing
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 30px; /* More rounded corners like header */
     overflow: hidden;
@@ -133,7 +133,7 @@
     transform: translateX(0); /* Center card */
     
     .event-concert-title {
-      font-size: 3.2rem;
+      font-size: clamp(2.2rem, 6vw, 3.2rem); // adapt with viewport
       font-weight: 800;
       color: var(--color-text);
       text-transform: uppercase;
@@ -147,6 +147,7 @@
     
     .event-main-content {
       display: flex;
+      flex-wrap: wrap;     // allow wrapping on medium widths
       gap: 30px;
       margin-bottom: 30px;
       
@@ -163,33 +164,26 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start; /* Align content to the left (closer to poster) */
-        flex-grow: 1;
+        flex: 1 1 260px;  // grow but allow shrink
+        min-width: 0;     // prevent overflow
         gap: 15px; 
 
         .event-city-date-time-wrapper {
           display: flex;
           flex-direction: column;
-          align-items: flex-start; /* Left align the lines within this wrapper */
-          width: auto; /* Allow wrapper to size to its content for true centering */
-          min-width: max-content; /* Ensure wrapper expands for long city/date lines */
+          align-items: center; /* Center within card */
+          width: 100%; /* occupy full line for centering */
+          min-width: auto; /* remove constraint causing overflow */
 
           .event-location-large {
-            font-size: 2.3rem; /* Increased by another 10% */
+            font-size: clamp(1.8rem, 5vw, 2.3rem);
             font-weight: 700;
             color: var(--color-text);
             text-transform: uppercase;
             line-height: 1.1;
-            text-align: left; /* Left-align the 'City • Date' text */
-            white-space: nowrap; /* Ensure it stays on one line */
+            text-align: center; /* center text */
+            white-space: normal; /* allow wrapping if needed */
 
-            .dot-separator {
-              font-size: 2.8rem; /* Increased by another 20% */
-              vertical-align: middle; /* Base alignment */
-              margin: 0 0.3em; 
-              color: var(--color-text);
-              position: relative; /* Enable fine-tuning */
-              top: -0.1em; /* Increased upward nudge for better visual centering */
-            }
           }
 
           .event-time-display,
@@ -203,7 +197,9 @@
             text-align: left;
             margin-top: 5px;
             align-self: flex-start;
-            white-space: nowrap; /* Prevents wrapping to next line */
+            white-space: normal; /* allow wrapping */
+            overflow-wrap: anywhere;
+            word-break: break-word;
           }
         }
         
@@ -215,6 +211,9 @@
           width: 100%; /* Allow full width */
           margin-top: 10px; 
           align-self: flex-start; /* Ensure left alignment */
+          white-space: normal;       // allow multi-line wrapping
+          overflow-wrap: anywhere;   // break very long strings
+          word-break: break-word;    // fallback for older browsers
         }
       }
     }
@@ -253,7 +252,7 @@
     .event-action {
       width: 100%;
       margin-top: 20px; /* Add space between description and button */
-      align-self: flex-start; /* Align with description */
+      align-self: stretch; /* take full column width */
       
       .event-buy-button {
         background-color: transparent;
@@ -267,7 +266,8 @@
         letter-spacing: 1px;
         cursor: pointer;
         transition: all 0.3s ease;
-        width: 100%; /* Full width to match the city/date line */
+        width: 100%;
+        max-width: none;  // full width of parent
         box-sizing: border-box;
         display: block; /* Block level for full width */
         
@@ -290,6 +290,20 @@
   }
 }
 
+/* Mobile-only line break */
+.mobile-break {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .mobile-break {
+    display: initial;
+  }
+  .dot-separator {
+    display: none;  // hide bullet when date wraps under city
+  }
+}
+
 /* Media Queries */
 @media (max-width: 992px) {
   .artist-header {
@@ -300,6 +314,7 @@
   
   .events-list {
     .event-card {
+      width: 95%; // scale down slightly on medium screens
       padding: 25px;
       
       .event-concert-title {
@@ -310,13 +325,14 @@
 }
 
 @media (max-width: 768px) {
+  .home-page {
+    background-size: 120% auto; 
+    background-position: center top;
+  }
   .artist-header {
     margin-bottom: 50px;
+    height: 110vh; 
 
-    .scroll-indicator {
-      top: calc(70% - 150px); // Moved up by an additional 100px (total 250px from original desktop)
-    }
-    
     .artist-title {
       font-size: 3rem;
     }
@@ -350,13 +366,10 @@
         }
         
         .event-middle-content {
-          .event-location-large {
-            font-size: 2.5rem;
-            text-align: center;
-          }
-          
-          .event-time-display {
-            text-align: center;
+          .event-city-date-time-wrapper {
+            .event-location-large {
+              font-size: clamp(2.16rem, 6vw, 2.76rem); // 20% larger on mobile
+            }
           }
         }
       }
@@ -370,6 +383,10 @@
 }
 
 @media (max-width: 576px) {
+  .home-page {
+    background-size: 140% auto; 
+    background-position: center top;
+  }
   .events-list .event-card .event-main-content .event-poster {
     width: 100%; // Full width on very small screens
     align-self: stretch; // Allow it to stretch if parent is flex and aligns items to stretch by default
@@ -381,7 +398,8 @@
   
   .artist-header {
     margin-bottom: 40px;
-    
+    height: 120vh;
+
     .artist-title {
       font-size: 2.5rem;
     }
@@ -398,14 +416,25 @@
       .event-concert-title {
         font-size: 1.8rem;
       }
-      
-      .event-main-content {
-        .event-middle-content {
-          .event-location-large {
-            font-size: 2rem;
-          }
-        }
-      }
     }
+  }
+  .events-list {
+    .event-details {
+      width: 100%;
+      text-align: center; // Center text within details
+      padding: 0 10px; // Add some horizontal padding
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .home-page {
+    background-position: center -50px; // raised background by 50px for screens ≥992px
+  }
+}
+
+@media (min-width: 1400px) {
+  .home-page {
+    background-position: center -150px; // desktop: 50px lower than medium
   }
 }
