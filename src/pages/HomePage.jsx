@@ -12,31 +12,25 @@ const HomePage = () => {
 
   useEffect(() => {
     async function loadEvents() {
-      setLoading(true); // Добавим setLoading(true) в начало
+      setLoading(true); 
       try {
         const data = await fetchEvents();
-        console.log('Raw API Response Data:', data); // Оставим для проверки
 
         if (data && Array.isArray(data.data)) {
           const formatted = data.data.map((item, index) => {
-            console.log(`Processing item[${index}]:`, item); // item УЖЕ должен быть объектом с атрибутами + id
 
-            // Формируем URL для изображения
             const strapiBaseUrl = getStrapiBaseUrl();
             const imageUrl = item.image && (item.image.url || item.image.formats?.thumbnail?.url)
               ? `${strapiBaseUrl}${item.image.url || item.image.formats.thumbnail.url}`
               : '';
             
-            // Обработка описания (RichText) - пока просто возьмем как есть или первую строку
             let eventDescription = '';
             if (Array.isArray(item.description) && item.description.length > 0) {
-              // Попытка извлечь текст из первого параграфа, если это стандартный RichText
               const firstBlock = item.description[0];
               if (firstBlock && firstBlock.type === 'paragraph' && Array.isArray(firstBlock.children) && firstBlock.children.length > 0 && firstBlock.children[0].text) {
                 eventDescription = firstBlock.children[0].text;
               } else {
-                // Если не удалось, или структура другая, можно попробовать JSON.stringify или оставить пустым
-                eventDescription = 'Подробное описание скоро появится.'; // Заглушка
+                eventDescription = 'Подробное описание скоро появится.'; 
               }
             } else if (typeof item.description === 'string') {
               eventDescription = item.description;
@@ -45,32 +39,30 @@ const HomePage = () => {
 
             return {
               id: item.id,
-              concertTitle: item.name, // Прямой доступ к item.name
+              concertTitle: item.name, 
               date: item.date,
               time: item.time,
               city: item.city,
               venue: item.venue,
-              description: eventDescription, // Используем обработанное описание
-              posterImage: imageUrl, // Используем полный URL изображения
-              performingArtists: item.performing_artists || '', // Добавляем новое поле для артистов
+              description: eventDescription, 
+              posterImage: imageUrl, 
+              performingArtists: item.performing_artists || '', 
               tickets: Array.isArray(item.tickets) ? item.tickets.map((t) => ({
-                id: t.id, // Предполагаем, что у билета есть id
+                id: t.id, 
                 type: t.type,
                 price: t.price,
                 description: t.description,
-                currency_symbol: t.currency_symbol, // Добавляем символ валюты
-                purchase_url: t.purchase_url // Новое поле: ссылка на покупку
+                currency_symbol: t.currency_symbol, 
+                purchase_url: t.purchase_url 
               })) : [],
-              sold_out: false // Расширить схему позже
+              sold_out: false 
             };
           });
           setEvents(formatted);
         } else {
-          console.error('Данные от API не в ожидаемом формате:', data);
           setEvents([]);
         }
       } catch (e) {
-        console.error('Ошибка загрузки событий', e);
         setEvents([]);
       } finally {
         setLoading(false);
@@ -86,15 +78,10 @@ const HomePage = () => {
 
   const closeModal = () => setModalOpen(false);
 
-  // Scroll down to events section smoothly
   const scrollToEvents = () => {
     const section = document.getElementById('events');
     if (section) section.scrollIntoView({ behavior: 'smooth' });
   };
-
-  if (loading) {
-    return <div className="home-page"><p style={{color: '#fff'}}>Загрузка...</p></div>;
-  }
 
   return (
     <div className="home-page">
@@ -106,41 +93,58 @@ const HomePage = () => {
           </div>
         </div>
         
-        <div id="events" className="events-list">
-          {events.map((event, index) => (
-            <div className="event-card" key={index}>
-              <h2 className="event-concert-title">{event.concertTitle}</h2>
-              <div className="event-main-content">
-                <img
-                  src={event.posterImage}
-                  alt={event.venue}
-                  className="event-poster"
-                />
-                <div className="event-middle-content">
-                  <div className="event-city-date-time-wrapper"> {/* New wrapper */}
-                    <div className="event-location-large">
-                      {event.city}
-                      <br className="mobile-break" />
-                      <span className="event-date"> {event.date}</span>
+        {loading && (
+          <div className="loading-spinner-container">
+            <div className="dot-spinner">
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
+              <div className="dot"></div>
+            </div>
+            <p className="loading-text">Загрузка</p>
+          </div>
+        )}
+        {!loading && (
+          <div id="events" className="events-list">
+            {events.map((event, index) => (
+              <div className="event-card" key={index}>
+                <h2 className="event-concert-title">{event.concertTitle}</h2>
+                <div className="event-main-content">
+                  <img loading="lazy"
+                    src={event.posterImage}
+                    alt={event.venue}
+                    className="event-poster"
+                  />
+                  <div className="event-middle-content">
+                    <div className="event-city-date-time-wrapper"> 
+                      <div className="event-location-large">
+                        {event.city}
+                        <br className="mobile-break" />
+                        <span className="event-date"> {event.date}</span>
+                      </div>
+                      <div className="event-time-display">START - {event.time}</div>
+                      <div className="event-venue-display">PLACE - VOODOO CLUB</div>
+                      <div className="event-artists-display">LIVE - {event.performingArtists}</div>
                     </div>
-                    <div className="event-time-display">START - {event.time}</div>
-                    <div className="event-venue-display">PLACE - VOODOO CLUB</div>
-                    <div className="event-artists-display">LIVE - {event.performingArtists}</div>
-                  </div>
-                  <p className="event-short-description">{event.description}</p>
-                  <div className="event-action">
-                    {event.sold_out ? (
-                      <div className="event-sold-out">SOLD OUT</div>
-                    ) : (
-                      <button className="event-buy-button" onClick={() => openModal(event)}>КУПИТЬ БИЛЕТ</button>
-                    )}
+                    <p className="event-short-description">{event.description}</p>
+                    <div className="event-action">
+                      {event.sold_out ? (
+                        <div className="event-sold-out">SOLD OUT</div>
+                      ) : (
+                        <button className="event-buy-button" onClick={() => openModal(event)}>КУПИТЬ БИЛЕТ</button>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-            </div>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
       {selectedEvent && (
         <TicketModal 

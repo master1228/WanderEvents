@@ -65,3 +65,111 @@ import ticketIcon from '../assets/icons/ticket.svg';
 ### `npm run build`
 
 Создает оптимизированную версию приложения для продакшена в папке `build`.
+
+## Системные требования
+
+- Node.js **v18** или выше
+- npm **v9** или выше (или pnpm/yarn на ваш выбор)
+
+## Переменные окружения
+
+Фронтенд использует переменные, задаваемые через `.env*` файлы в корне:
+
+| Переменная                | Назначение                                         | Пример                             |
+|---------------------------|----------------------------------------------------|------------------------------------|
+| `REACT_APP_API_URL`       | Базовый URL Strapi CMS                             | `https://wandereventscms.onrender.com/api` |
+| `REACT_APP_API_TOKEN`     | Персональный токен доступа (Strapi → Settings → API Tokens) | `d3cb5...`                       |
+| `REACT_APP_STRAPI_CDN`    | CDN-домен для картинок, если используете Cloudflare | `https://cdn.wanderevents.pl`      |
+
+Создайте `.env.development` для локальной разработки и `.env.production` для деплоя.
+
+## Backend (Strapi) – структура контента
+
+### Content-Type `Event`
+| Поле     | Тип        |
+|----------|-----------|
+| name     | Text      |
+| description | Rich Text |
+| date     | Text (short) |
+| time     | Text (short) |
+| city     | Text      |
+| venue    | Text      |
+| image    | Media     |
+| tickets  | Relation many → `Ticket` |
+
+### Content-Type `Ticket`
+| Поле        | Тип     |
+|-------------|---------|
+| type        | Text    |
+| description | Text    |
+| price       | Number  |
+
+### Кэширование Strapi
+1. Установите плагин: `npm install strapi-plugin-rest-cache redis@^4`
+2. `config/plugins.js`:
+```js
+module.exports = {
+  "rest-cache": {
+    enabled: true,
+    provider: {
+      name: "redis",
+      options: {
+        max: 32767,
+        connection: {
+          host: "127.0.0.1",
+          port: 6379,
+        },
+      },
+    },
+  },
+};
+```
+3. Перезапустите Strapi.
+
+## SEO
+
+1. **Мета-теги** уже прописаны в `public/index.html` (`title`, `description`, OpenGraph, Twitter Card).
+2. **robots.txt** разрешает обход и указывает карту сайта.
+3. **sitemap.xml** генерируется вручную и лежит в `public/sitemap.xml`. Добавьте при необходимости внутренние URL.
+4. Добавьте домен в **Google Search Console** и отправьте `sitemap.xml`.
+
+## Платёжные провайдеры
+
+| Провайдер       | Тип подключения                | Нужен бизнес-аккаунт | SDK/документация |
+|-----------------|--------------------------------|----------------------|------------------|
+| Stripe Checkout | Хост-страница, вебхуки         | Нет (Sole Proprietor)| https://stripe.com/docs/payments/checkout |
+| PayPal Buttons  | JS SDK, клиентский рендер      | Нет                 | https://developer.paypal.com/docs/checkout/ |
+| BTCPay Server   | Self-hosted крипто-платежи     | Нет                 | https://docs.btcpayserver.org/ |
+
+После успешного платежа вызывайте эндпоинт Strapi `/orders` (создать Content-Type `Order`) через webhook или фронтенд callback.
+
+## Сборка и деплой
+
+```bash
+# продакшн
+npm run build
+# результат в папке build/ загрузите на Netlify, Vercel или статический хостинг
+```
+
+Для авто-деплоя на Netlify положите `netlify.toml`:
+```toml
+[build]
+  publish = "build"
+  command = "npm run build"
+```
+
+## Тестирование
+
+- Jest + React Testing Library (`npm test`).
+- ESLint конфиг включён через `react-app`.
+
+## Troubleshooting
+
+| Проблема                               | Решение |
+|----------------------------------------|---------|
+| Белый экран после деплоя               | Проверьте правильность `REACT_APP_API_URL` в build.
+| Медленная загрузка списка событий      | Убедитесь, что Strapi кэш включён и ответы не содержат лишних полей.
+
+## Лицензия
+
+MIT © WanderEvents Team
