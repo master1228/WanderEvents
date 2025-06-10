@@ -7,7 +7,7 @@
   position: fixed;
   top: 20px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% - 2px)); // Shift desktop header left by 2px
   z-index: 1000;
   padding: 0.8rem 2rem;
   max-width: 90%;
@@ -45,19 +45,32 @@
   }
   
   &__nav {
-    // flex: 1; // Removed flex: 1
     display: flex;
     align-items: center;
-    
+    width: 90px; // Even narrower default width for EN/RU
+
+    // Language-specific adjustment for Polish
+    html[lang="pl"] & {
+      width: 100px;
+    }
+
+    &.header__nav-left {
+      justify-content: flex-end;
+    }
+
+    &.header__nav-right {
+      justify-content: flex-start;
+    }
+
     &-list {
       display: flex;
       gap: 2rem;
     }
-    
+
     &-item {
       position: relative;
     }
-    
+
     &-link {
       font-size: 0.8rem;
       font-weight: 500;
@@ -65,7 +78,7 @@
       transition: color 0.2s ease;
       text-transform: uppercase;
       letter-spacing: 1px;
-      
+
       &:hover {
         color: var(--color-secondary);
       }
@@ -81,6 +94,12 @@
     font-size: 1.5rem;
     cursor: pointer;
   }
+
+  /* Nudge the right nav link for alignment on PL version */
+  html[lang="pl"] &__nav-right .header__nav-link {
+    position: relative;
+    left: 11px;
+  }
 }
 
 /* Media Queries */
@@ -94,6 +113,7 @@
 
 @media (max-width: 768px) {
   .header {
+    margin-left: -6px; // Shift mobile header left by additional 2px
     width: auto;
     padding: 0.6rem 1.2rem;
     height: auto;
@@ -104,6 +124,8 @@
       gap: 0;
       padding: 0;
     }
+
+
 
     &__brand-text {
       font-size: 1.2rem;

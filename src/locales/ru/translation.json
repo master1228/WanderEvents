@@ -1,0 +1,53 @@
+{
+  "header": {
+    "return_policy": "Возврат билетов",
+    "events": "СОБЫТИЯ",
+    "contacts": "О НАС"
+  },
+  "footer": {
+    "subscribe_newsletter": "Подпишитесь на нашу рассылку",
+    "subscribe": "ПОДПИСАТЬСЯ",
+    "rights_reserved": "Все права защищены",
+    "return_ticket": "Возврат билетов",
+    "agreement": "Соглашение пользователя",
+    "contact": "Контакты",
+    "subscribe_placeholder": "ВВЕДИТЕ ВАШ ИМЕЙЛ",
+    "copyright": "WanderEvents",
+    "developed_by": "Developed by"
+  },
+  "event_card": {
+    "buy_ticket": "КУПИТЬ БИЛЕТ",
+    "sold_out": "SOLD OUT",
+    "date": "Дата",
+    "location": "Место",
+    "attendees": "участников",
+    "free": "Бесплатно",
+    "view_details": "Подробнее"
+  },
+  "ticket_modal": {
+    "tickets_for": "БИЛЕТЫ НА {{eventName}}",
+    "place": "Место",
+    "date": "Дата",
+    "time": "Время",
+    "club": "Клуб",
+    "select_ticket_type": "ВЫБЕРИТЕ ТИП БИЛЕТА",
+    "our_moments": "Лучшие моменты",
+    "buy": "КУПИТЬ",
+    "tickets_unavailable": "Билеты недоступны",
+    "not_available": "—"
+  },
+  "agreement_modal": {
+    "agreement_title": "Пользовательское соглашение",
+    "loading": "Загрузка...",
+    "translation_missing": "Перевод для этого языка отсутствует.",
+    "agreement_fetch_error": "Не удалось загрузить соглашение.",
+    "agreement_modal_error": "Не удалось загрузить соглашение. Пожалуйста, попробуйте еще раз.",
+    "agreement_modal_missing_translation": "Перевод не найден."
+  },
+  "scroll_down": "листай дальше",
+  "about_us_page": {
+    "title": "О нас",
+    "text": "WanderEvents — это ваш гид в мир самых ярких и незабываемых событий. Мы объединяем организаторов и ценителей качественной музыки, создавая уникальную платформу для покупки и продажи билетов. Наша миссия — сделать культуру доступной, а каждое мероприятие — особенным.\n\nМы верим, что музыка и живые выступления способны менять мир к лучшему, и наша команда работает каждый день, чтобы вы могли стать частью этого волшебства. Присоединяйтесь к нашему сообществу и открывайте новые горизонты вместе с WanderEvents!",
+    "media_title": "Наши моменты"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "header": {
+    "return_policy": "Return Policy",
+    "events": "EVENTS",
+    "contacts": "ABOUT US"
+  },
+  "footer": {
+    "subscribe_newsletter": "Subscribe to our newsletter",
+    "subscribe": "SUBSCRIBE",
+    "rights_reserved": "All rights reserved",
+    "return_ticket": "Ticket Return",
+    "agreement": "User Agreement",
+    "contact": "Contacts",
+    "subscribe_placeholder": "ENTER YOUR EMAIL",
+    "copyright": "WanderEvents",
+    "developed_by": "Developed by"
+  },
+  "event_card": {
+    "buy_ticket": "BUY TICKET",
+    "sold_out": "SOLD OUT",
+    "date": "Date",
+    "location": "Location",
+    "attendees": "attendees",
+    "free": "Free",
+    "view_details": "View Details"
+  },
+  "ticket_modal": {
+    "tickets_for": "TICKETS FOR {{eventName}}",
+    "place": "Place",
+    "date": "Date",
+    "time": "Time",
+    "club": "Club",
+    "select_ticket_type": "SELECT TICKET TYPE",
+    "our_moments": "Our Moments",
+    "buy": "BUY",
+    "tickets_unavailable": "Tickets are not available",
+    "not_available": "—"
+  },
+  "agreement_modal": {
+    "agreement_title": "User Agreement",
+    "loading": "Loading...",
+    "translation_missing": "Translation for this language is not available.",
+    "agreement_fetch_error": "Failed to load agreement."
+  },
+  "scroll_down": "scroll down",
+  "about_us_page": {
+    "title": "About Us",
+    "text": "WanderEvents is your guide to the world of the brightest and most unforgettable events. We bring together organizers and connoisseurs of quality music, creating a unique platform for buying and selling tickets. Our mission is to make culture accessible and every event special.\n\nWe believe that music and live performances can change the world for the better, and our team works every day so you can be a part of this magic. Join our community and discover new horizons with WanderEvents!",
+    "media_title": "Our Moments"
+  }
+}

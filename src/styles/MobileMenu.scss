@@ -1,0 +1,38 @@
+.mobile-menu-container {
+  display: none; // Hidden on desktop
+  position: fixed;
+  top: 26px; // Lowered by 1px
+  left: 15px;
+  z-index: 1001; // Ensure it's above other content
+
+  @media (max-width: 768px) {
+    display: block; // Show on mobile screens
+  }
+}
+
+.mobile-menu-button {
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 53px; // Increased by ~10%
+  height: 53px; // Increased by ~10%
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    stroke: white;
+  }
+}

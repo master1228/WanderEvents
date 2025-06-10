@@ -1,0 +1,86 @@
+.language-switcher {
+  position: fixed;
+  top: calc(28px + 0.2rem); // Nudged up by 2px
+  right: 40px;  // Position on the right
+  z-index: 1001;
+
+  .switcher-toggle {
+    width: 3.4rem; // Increased by 25%
+    height: 3.4rem;
+    background-color: rgba(0, 0, 0, 0.7);    // Style like header
+    backdrop-filter: blur(8px);             // Style like header
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); // Style like header
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    svg {
+      color: white;
+      font-size: 24px;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+  }
+
+  .language-options {
+    position: absolute;
+    top: 3.9rem; // Adjusted for new size (3.4rem + 0.5rem)
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+
+    button {
+      width: 3.4rem;  // Match toggle button's size
+      height: 3.4rem; // Match toggle button's size
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &.open .language-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .language-switcher {
+    top: calc(23px + 0.2rem); // Moved up by 5px
+    right: 31px; // Adjusted for mobile
+
+    .switcher-toggle,
+    .language-options button {
+      width: 2.7rem; // Reduced by 20%
+      height: 2.7rem;
+    }
+
+    .language-options {
+      top: 3.2rem; // Adjusted for new size (2.7rem + 0.5rem)
+    }
+  }
+}

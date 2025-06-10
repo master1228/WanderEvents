@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FaCalendarAlt, FaMapMarkerAlt, FaUserFriends } from 'react-icons/fa';
 import '../styles/EventCard.scss';
 
 const EventCard = ({ event }) => {
+  const { t } = useTranslation();
   const { id, title, image, date, location, category, attendees, price } = event;
 
   return (
@@ -19,24 +21,24 @@ const EventCard = ({ event }) => {
         <div className="event-card__details">
           <div className="event-card__detail">
             <FaCalendarAlt className="event-card__icon" />
-            <span>{date}</span>
+            <span>{t('event_card.date')}: {date}</span>
           </div>
           
           <div className="event-card__detail">
             <FaMapMarkerAlt className="event-card__icon" />
-            <span>{location}</span>
+            <span>{t('event_card.location')}: {location}</span>
           </div>
           
           <div className="event-card__detail">
             <FaUserFriends className="event-card__icon" />
-            <span>{attendees} attendees</span>
+            <span>{t('event_card.attendees')}: {attendees} attendees</span>
           </div>
         </div>
         
         <div className="event-card__footer">
-          <span className="event-card__price">{price ? `$${price}` : 'Free'}</span>
+          <span className="event-card__price">{price ? `$${price}` : t('event_card.free')}</span>
           <Link to={`/events/${id}`} className="event-card__button">
-            View Details
+            {t('event_card.view_details')}
           </Link>
         </div>
       </div>

@@ -11,12 +11,11 @@
 html, body, #root {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden; /* ЗАПРЕТИТЬ прокрутку здесь */
   margin: 0;
   padding: 0;
   border: none;
   background-color: transparent;
-  scroll-behavior: smooth;
 }
 
 :root {
@@ -74,7 +73,10 @@ img {
 }
 
 /* App styles */
-.app {
+.App { /* Используем правильный селектор с заглавной 'A' */
+  height: 100vh; /* Занимает всю высоту окна */
+  overflow-y: auto; /* РАЗРЕШИТЬ прокрутку только здесь */
+  scroll-behavior: smooth; /* Возвращаем плавную прокрутку */
   display: flex;
   flex-direction: column;
   background-color: transparent;

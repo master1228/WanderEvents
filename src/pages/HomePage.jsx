@@ -1,28 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FaChevronDown } from 'react-icons/fa';
 import '../styles/HomePage.scss';
 import TicketModal from '../components/TicketModal';
 import { fetchEvents, getStrapiBaseUrl } from '../utils/api';
+import { useLanguage } from '../context/LanguageContext';
+import overlayImg from '../assets/images/Untwrwitled-1.png';
 
 const HomePage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const { locale } = useLanguage();
+  const { t } = useTranslation();
+  const location = useLocation();
+  const eventsRef = useRef(null);
 
   useEffect(() => {
     async function loadEvents() {
       setLoading(true); 
       try {
-        const data = await fetchEvents();
+        const data = await fetchEvents(locale);
 
         if (data && Array.isArray(data.data)) {
           const formatted = data.data.map((item, index) => {
 
             const strapiBaseUrl = getStrapiBaseUrl();
-            const imageUrl = item.image && (item.image.url || item.image.formats?.thumbnail?.url)
+            // Prioritize img_url, then fall back to the uploaded image
+            const imageUrl = item.img_url || (item.image && (item.image.url || item.image.formats?.thumbnail?.url)
               ? `${strapiBaseUrl}${item.image.url || item.image.formats.thumbnail.url}`
-              : '';
+              : '');
             
             let eventDescription = '';
             if (Array.isArray(item.description) && item.description.length > 0) {
@@ -55,7 +64,7 @@ const HomePage = () => {
                 currency_symbol: t.currency_symbol, 
                 purchase_url: t.purchase_url 
               })) : [],
-              sold_out: false 
+              soldout: item.soldout || false
             };
           });
           setEvents(formatted);
@@ -69,7 +78,14 @@ const HomePage = () => {
       }
     }
     loadEvents();
-  }, []);
+  }, [locale]);
+
+  useEffect(() => {
+    // Only scroll if the navigation state is set AND the events have been loaded.
+    if (location.state?.scrollToEvents && eventsRef.current && events.length > 0) {
+      eventsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location.state, events]);
 
   const openModal = (event) => {
     setSelectedEvent(event);
@@ -88,7 +104,7 @@ const HomePage = () => {
       <div className="events-container">
         <div className="artist-header">
           <div className="scroll-indicator" onClick={scrollToEvents} role="button">
-            <div className="scroll-text">листай дальше</div>
+            <div className="scroll-text">{t('scroll_down')}</div>
             <FaChevronDown className="scroll-arrow" />
           </div>
         </div>
@@ -109,9 +125,14 @@ const HomePage = () => {
           </div>
         )}
         {!loading && (
-          <div id="events" className="events-list">
+          <div id="events" className="events-list" ref={eventsRef}>
             {events.map((event, index) => (
               <div className="event-card" key={index}>
+                {event.soldout && (
+                  <div className="event-overlay">
+                    <img src={overlayImg} alt="Недоступно" className="overlay-image" />
+                  </div>
+                )}
                 <h2 className="event-concert-title">{event.concertTitle}</h2>
                 <div className="event-main-content">
                   <img loading="lazy"
@@ -132,9 +153,7 @@ const HomePage = () => {
                     </div>
                     <p className="event-short-description">{event.description}</p>
                     <div className="event-action">
-                      {event.sold_out ? (
-                        <div className="event-sold-out">SOLD OUT</div>
-                      ) : (
+                      {!event.soldout && (
                         <button className="event-buy-button" onClick={() => openModal(event)}>КУПИТЬ БИЛЕТ</button>
                       )}
                     </div>

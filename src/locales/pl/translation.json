@@ -1,0 +1,53 @@
+{
+  "header": {
+    "return_policy": "Polityka zwrotów",
+    "events": "WYDARZENIA",
+    "contacts": "O NAS"
+  },
+  "footer": {
+    "subscribe_newsletter": "Zapisz się do naszego newslettera",
+    "subscribe": "SUBSKRYBUJ",
+    "rights_reserved": "Wszelkie prawa zastrzeżone",
+    "return_ticket": "Zwrot biletów",
+    "agreement": "Umowa użytkownika",
+    "contact": "Kontakt",
+    "subscribe_placeholder": "WPROWADŹ SWÓJ ADRES E-MAIL",
+    "copyright": "WanderEvents",
+    "developed_by": "Opracowane przez"
+  },
+  "event_card": {
+    "buy_ticket": "KUP BILET",
+    "sold_out": "WYPRZEDANE",
+    "date": "Data",
+    "location": "Lokalizacja",
+    "attendees": "uczestników",
+    "free": "Darmowy",
+    "view_details": "Zobacz szczegóły"
+  },
+  "ticket_modal": {
+    "tickets_for": "BILETY NA {{eventName}}",
+    "place": "Miejsce",
+    "date": "Data",
+    "time": "Godzina",
+    "club": "Klub",
+    "select_ticket_type": "WYBIERZ RODZAJ BILETU",
+    "our_moments": "Nasze chwile",
+    "buy": "KUP",
+    "tickets_unavailable": "Bilety niedostępne",
+    "not_available": "—"
+  },
+  "agreement_modal": {
+    "agreement_title": "Umowa użytkownika",
+    "loading": "Ładowanie...",
+    "translation_missing": "Tłumaczenie dla tego języka nie jest dostępne.",
+    "agreement_fetch_error": "Nie udało się załadować umowy.",
+    "agreement_modal_error": "Nie udało się załadować umowy. Proszę spróbować ponownie.",
+    "agreement_modal_missing_translation": "Nie znaleziono tłumaczenia."
+  },
+  "scroll_down": "przewiń w dół",
+  "about_us_page": {
+    "title": "O nas",
+    "text": "WanderEvents to Twój przewodnik po świecie najjaśniejszych i niezapomnianych wydarzeń. Łączymy organizatorów i koneserów jakościowej muzyki, tworząc unikalną platformę do kupowania i sprzedawania biletów. Naszą misją jest uczynienie kultury dostępną, a każde wydarzenie wyjątkowym.\n\nWierzymy, że muzyka i występy na żywo mogą zmieniać świat na lepsze, a nasz zespół pracuje każdego dnia, abyś mógł stać się częścią tej magii. Dołącz do naszej społeczności i odkrywaj nowe horyzonty z WanderEvents!",
+    "media_title": "Nasze chwile"
+  }
+}

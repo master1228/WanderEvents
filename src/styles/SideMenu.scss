@@ -1,0 +1,66 @@
+.side-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1002;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1); // Lighter glass effect
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.2); // Subtle white border
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1003;
+  padding-top: 80px;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    a {
+      display: block;
+      padding: 15px 30px;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 500;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:hover {
+        background-color: #525f7f;
+        color: white;
+      }
+
+      &.active {
+        color: white;
+        font-weight: 700;
+      }
+    }
+  }
+}

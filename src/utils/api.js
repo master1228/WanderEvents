@@ -29,7 +29,10 @@ if (!API_TOKEN) {
   console.error('Missing environment variable REACT_APP_STRAPI_TOKEN');
 }
 
-export async function strapiFetch(endpoint, { method = 'GET', body } = {}) {
+export async function strapiFetch(endpoint, { method = 'GET', body } = {}, locale = 'ru') {
+  const separator = endpoint.includes('?') ? '&' : '?';
+  const localizedEndpoint = `${endpoint}${separator}locale=${locale}`;
+
   const servers = [
     { url: LOCAL_API_URL, token: LOCAL_API_TOKEN },
     { url: API_URL, token: API_TOKEN },
@@ -40,28 +43,32 @@ export async function strapiFetch(endpoint, { method = 'GET', body } = {}) {
 
   let lastError;
   for (const { url, token } of servers) {
+    if (!url) continue; // Skip if a URL isn't defined
     try {
-      const opts = { ...optionsBase };
-      if (token) opts.headers.Authorization = `Bearer ${token}`;
-      const res = await fetch(`${url}${endpoint}`, opts);
+      const opts = { ...optionsBase, headers: { ...optionsBase.headers } }; // Clone headers to avoid mutation
+      if (token) {
+        opts.headers.Authorization = `Bearer ${token}`;
+      }
+      const res = await fetch(`${url}${localizedEndpoint}`, opts);
       if (!res.ok) {
-        // For 401/404 etc. treat as error, but try next server
-        lastError = new Error(`Strapi request failed: ${res.status}`);
+        lastError = new Error(`Strapi request to ${url} failed: ${res.status}`);
         continue;
       }
       return res.json();
     } catch (err) {
       lastError = err;
-      // Network error etc. -> try next server
     }
   }
   throw lastError || new Error('All Strapi servers failed');
 }
 
-// Fetch events with all relations populated (image, tickets, etc.)
-export async function fetchEvents() {
-  return strapiFetch('/events?populate=*');
-}
+// Update fetch functions to accept and pass locale
+export const fetchEvents = (locale) => strapiFetch('/events?populate=*', {}, locale);
+export const fetchFooterLinks = (locale) => strapiFetch('/ftrs?populate=*', {}, locale);
+export const fetchSocialLinks = (locale) => strapiFetch('/scls?populate=*', {}, locale);
+export const fetchVideo = (locale) => strapiFetch('/videos?populate=*', {}, locale);
+export const fetchAbout = (locale) => strapiFetch('/abous?populate=*', {}, locale);
+export const fetchAgreement = (locale) => strapiFetch('/agrs?populate=*', {}, locale);
 
 // Additional helpers can be added here (e.g., fetchSingleEvent, createTicket, etc.)
 

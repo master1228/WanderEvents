@@ -1,30 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-import UserAgreement from './pages/UserAgreement';
-import Footer from './components/Footer'; // Added Footer component import
+import LandingPage from './pages/LandingPage';
+import Footer from './components/Footer';
+import LanguageSwitcher from './components/LanguageSwitcher';
+import MobileMenu from './components/MobileMenu';
+import SideMenu from './components/SideMenu';
+import ScrollToTop from './components/ScrollToTop';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import './styles/App.scss';
 
-function App() {
+// This component applies the language attribute to the HTML tag.
+const LanguageEffect = () => {
+  const { locale } = useLanguage();
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
+  return null; // This component does not render anything.
+};
+
+const App = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    // Prevent body scroll when the menu is open
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
+  }, [isMenuOpen]);
   return (
-    <Router>
-      <div id="app-top" className="app" style={{ 
-          backgroundColor: '#000000'
-        }}>
-        <Header />
-        <main className="main-content" style={{ backgroundColor: 'transparent', padding: 0 }}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/store" element={<HomePage />} />
-            <Route path="/contacts" element={<HomePage />} />
-            <Route path="/user-agreement" element={<UserAgreement />} />
-          </Routes>
+    <LanguageProvider>
+      <Router>
+        <ScrollToTop />
+        <LanguageEffect />
+        <div className="App">
+          <MobileMenu onMenuClick={() => setMenuOpen(true)} />
+          <SideMenu isOpen={isMenuOpen} onClose={() => setMenuOpen(false)} />
+          <LanguageSwitcher />
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/welcome" element={<LandingPage />} />
+            </Routes>
+          </main>
           <Footer />
-        </main>
-      </div>
-    </Router>
+        </div>
+      </Router>
+    </LanguageProvider>
   );
-}
+};
 
 export default App;
