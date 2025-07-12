@@ -43,6 +43,9 @@
     "agreement_fetch_error": "Failed to load agreement."
   },
   "scroll_down": "scroll down",
+  "side_menu": {
+    "title": "MENU"
+  },
   "about_us_page": {
     "title": "About Us",
     "text": "WanderEvents is your guide to the world of the brightest and most unforgettable events. We bring together organizers and connoisseurs of quality music, creating a unique platform for buying and selling tickets. Our mission is to make culture accessible and every event special.\n\nWe believe that music and live performances can change the world for the better, and our team works every day so you can be a part of this magic. Join our community and discover new horizons with WanderEvents!",

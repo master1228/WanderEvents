@@ -15,6 +15,7 @@ const SideMenu = ({ isOpen, onClose }) => {
     <>
       <div className={`side-menu-overlay ${isOpen ? 'open' : ''}`} onClick={onClose}></div>
       <nav className={`side-menu ${isOpen ? 'open' : ''}`}>
+        <h4 className="side-menu-title">{t('side_menu.title', 'МЕНЮ')}</h4>
         <ul>
           <li>
             <Link to="/" className={location.pathname === '/' ? 'active' : ''} onClick={handleLinkClick}>

@@ -1,17 +1,25 @@
 // src/utils/api.js
 // Helper functions to interact with the Strapi API (Render cloud only)
 
-// Try to load local dev override first
-let localConfig;
-try {
-  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
-  localConfig = require('../strapi.local').default;
-} catch (_) {
-  localConfig = null;
+// Try to load local dev override first (only in development)
+/* eslint-disable global-require */
+let localConfig = null;
+if (process.env.NODE_ENV !== 'production') {
+  try {
+    // Use dynamic eval so webpack doesn't bundle the file in production
+    // eslint-disable-next-line no-eval
+    localConfig = eval("require('../strapi.local.example')").default;
+  } catch {
+    // File absent – fall back to .env
+    localConfig = null;
+  }
 }
+/* eslint-enable global-require */
 
 const API_URL = localConfig?.API_URL || process.env.REACT_APP_STRAPI_URL;
-const API_TOKEN = localConfig?.API_TOKEN || process.env.REACT_APP_STRAPI_TOKEN;
+// Hard-coded production token to avoid relying on build-time env
+const HARDCODE_TOKEN = '106b6ef7b08988d2a974e89aacc30e525548dc8ed387231988925f23fbd1e5ea5ac2a21bc83bb6c311badb9532cfc5d67796d5b76309ad1ad743a0ca21560a2b85ecde310aea8625aeb5c962dffd3c68edb2c7248c97d9c3bcf038d8f950b1c3f06318b0f22d4ef00f60d04f0b12d95b0c857c03d72d3e0efa004132093686c5';
+let API_TOKEN = (localConfig?.API_TOKEN || HARDCODE_TOKEN).trim();
 const LOCAL_API_URL = 'http://localhost:1337/api';
 const LOCAL_API_TOKEN = localConfig?.LOCAL_API_TOKEN || process.env.REACT_APP_STRAPI_LOCAL_TOKEN || '';
 
@@ -19,7 +27,7 @@ const LOCAL_API_TOKEN = localConfig?.LOCAL_API_TOKEN || process.env.REACT_APP_ST
 console.log('Using Strapi config:', {
   source: localConfig ? 'strapi.local.js' : '.env',
   API_URL,
-  API_TOKEN_FIRST_CHARS: API_TOKEN?.substring(0, 10),
+  API_TOKEN_PRESENT: Boolean(API_TOKEN),
 });
 
 if (!API_URL) {
@@ -46,8 +54,9 @@ export async function strapiFetch(endpoint, { method = 'GET', body } = {}, local
     if (!url) continue; // Skip if a URL isn't defined
     try {
       const opts = { ...optionsBase, headers: { ...optionsBase.headers } }; // Clone headers to avoid mutation
-      if (token) {
-        opts.headers.Authorization = `Bearer ${token}`;
+      const trimmedToken = token?.trim();
+      if (trimmedToken) {
+        opts.headers.Authorization = `Bearer ${trimmedToken}`;
       }
       const res = await fetch(`${url}${localizedEndpoint}`, opts);
       if (!res.ok) {

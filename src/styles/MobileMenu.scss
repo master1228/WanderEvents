@@ -1,27 +1,26 @@
 .mobile-menu-container {
-  display: none; // Hidden on desktop
+  // Default styles for desktop
+  display: block;
   position: fixed;
-  top: 26px; // Lowered by 1px
-  left: 15px;
-  z-index: 1001; // Ensure it's above other content
-
-  @media (max-width: 768px) {
-    display: block; // Show on mobile screens
-  }
+  top: calc(28px + 0.2rem); // Match LanguageSwitcher's vertical position
+  left: 27px;               // Decreased by another 5px
+  z-index: 1001;
 }
 
 .mobile-menu-button {
   background-color: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  width: 53px; // Increased by ~10%
-  height: 53px; // Increased by ~10%
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, transform 0.2s ease;
+
+  // Default size for desktop, matching LanguageSwitcher
+  width: 3.4rem;
+  height: 3.4rem;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -34,5 +33,18 @@
 
   svg {
     stroke: white;
+  }
+}
+
+// Mobile-specific overrides
+@media (max-width: 768px) {
+  .mobile-menu-container {
+    top: 26px;
+    left: 26px;
+  }
+
+  .mobile-menu-button {
+    width: 43px;
+    height: 43px;
   }
 }
