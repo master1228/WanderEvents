@@ -42,6 +42,7 @@
     "translation_missing": "Translation for this language is not available.",
     "agreement_fetch_error": "Failed to load agreement."
   },
+  "loading": "Loading...",
   "scroll_down": "scroll down",
   "side_menu": {
     "title": "MENU"

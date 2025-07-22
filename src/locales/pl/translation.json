@@ -44,6 +44,7 @@
     "agreement_modal_error": "Nie udało się załadować umowy. Proszę spróbować ponownie.",
     "agreement_modal_missing_translation": "Nie znaleziono tłumaczenia."
   },
+  "loading": "Ładowanie...",
   "scroll_down": "przewiń w dół",
   "side_menu": {
     "title": "MENU"

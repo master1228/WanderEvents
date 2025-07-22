@@ -44,6 +44,7 @@
     "agreement_modal_error": "Не удалось загрузить соглашение. Пожалуйста, попробуйте еще раз.",
     "agreement_modal_missing_translation": "Перевод не найден."
   },
+  "loading": "Загрузка...",
   "scroll_down": "прокрутить вниз",
   "side_menu": {
     "title": "МЕНЮ"

@@ -71,6 +71,7 @@
       letter-spacing: 2px;
       transition: all 0.3s ease;
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       // New 3D glass border effect with top highlight
       box-shadow: 
         inset 0 1.5px 1px rgba(255, 255, 255, 0.25), // Top highlight

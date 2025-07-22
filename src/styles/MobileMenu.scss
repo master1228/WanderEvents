@@ -8,15 +8,16 @@
 }
 
 .mobile-menu-button {
-  background-color: #1a1a1a;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  border: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 
   // Default size for desktop, matching LanguageSwitcher
   width: 3.4rem;

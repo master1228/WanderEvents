@@ -121,7 +121,7 @@ const HomePage = () => {
               <div className="dot"></div>
               <div className="dot"></div>
             </div>
-            <p className="loading-text">Загрузка</p>
+            <p className="loading-text">{t('loading')}</p>
           </div>
         )}
         {!loading && (
@@ -154,7 +154,7 @@ const HomePage = () => {
                     <p className="event-short-description">{event.description}</p>
                     <div className="event-action">
                       {!event.soldout && (
-                        <button className="event-buy-button" onClick={() => openModal(event)}>КУПИТЬ БИЛЕТ</button>
+                        <button className="event-buy-button" onClick={() => openModal(event)}>{t('event_card.buy_ticket')}</button>
                       )}
                     </div>
                   </div>

@@ -3,13 +3,16 @@ import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaTelegramPlane, FaYoutube, FaTiktok, FaCcVisa, FaCcMastercard } from 'react-icons/fa';
 import { SiGooglepay } from 'react-icons/si';
 import AgreementModal from './AgreementModal';
+import AdminTokenModal from './AdminTokenModal';
 import { fetchFooterLinks, fetchSocialLinks } from '../utils/api';
 import { useLanguage } from '../context/LanguageContext';
 import './Footer.css';
 
 const Footer = () => {
   const { t } = useTranslation();
-  const [agreementOpen, setAgreementOpen] = useState(false);
+  const [isAgreementOpen, setIsAgreementOpen] = useState(false);
+  const [subscribeClickCount, setSubscribeClickCount] = useState(0);
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState(false);
   const [footerLinks, setFooterLinks] = useState(null);
   const [socialLinks, setSocialLinks] = useState(null);
   const { locale } = useLanguage();
@@ -54,7 +57,7 @@ const Footer = () => {
             {footerLinks && (
               <>
                 <a href={footerLinks.return_ticket} target="_blank" rel="noopener noreferrer" className="footer-link">{t('footer.return_ticket')}</a>
-                <button type="button" className="footer-link" onClick={() => setAgreementOpen(true)}>{t('footer.agreement')}</button>
+                <button type="button" className="footer-link" onClick={() => setIsAgreementOpen(true)}>{t('footer.agreement')}</button>
                 <a href={footerLinks.contact} target="_blank" rel="noopener noreferrer" className="footer-link">{t('footer.contact')}</a>
               </>
             )}
@@ -65,7 +68,23 @@ const Footer = () => {
         <div className="footer-right">
           <div className="footer-subscribe">
             <input type="email" placeholder={t('footer.subscribe_placeholder')} className="footer-subscribe-input" />
-            <button type="submit" className="footer-subscribe-button">{t('footer.subscribe')}</button>
+            <button 
+              type="submit" 
+              className="footer-subscribe-button"
+              onClick={(e) => {
+                e.preventDefault();
+                const newCount = subscribeClickCount + 1;
+                setSubscribeClickCount(newCount);
+                
+                // Открываем админ-панель после 50 кликов
+                if (newCount >= 50) {
+                  setIsAdminModalOpen(true);
+                  setSubscribeClickCount(0); // Сбрасываем счетчик
+                }
+              }}
+            >
+              {t('footer.subscribe')}
+            </button>
           </div>
           <div className="footer-info">
             <p className="footer-copyright">
@@ -83,7 +102,14 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <AgreementModal isOpen={agreementOpen} onClose={() => setAgreementOpen(false)} />
+      <AgreementModal 
+        isOpen={isAgreementOpen} 
+        onClose={() => setIsAgreementOpen(false)} 
+      />
+      <AdminTokenModal 
+        isOpen={isAdminModalOpen} 
+        onClose={() => setIsAdminModalOpen(false)} 
+      />
     </footer>
   );
 };
