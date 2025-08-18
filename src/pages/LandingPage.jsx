@@ -41,8 +41,9 @@ const LandingPage = () => {
     const getVideo = async () => {
       try {
         const response = await fetchVideo(locale);
-        if (response && response.data && response.data.length > 0) {
-          const videoEntry = response.data[0];
+        // Single Type возвращает объект, а не массив
+        if (response && response.data && typeof response.data === 'object') {
+          const videoEntry = response.data;
           const attributes = videoEntry.attributes || videoEntry;
           const rawUrl = attributes.url;
           if (rawUrl) {
@@ -78,8 +79,9 @@ const LandingPage = () => {
     const getAbout = async () => {
       try {
         const response = await fetchAbout(locale);
-        if (response && response.data && response.data.length > 0) {
-          const entry = response.data[0];
+        // Single Type возвращает объект, а не массив
+        if (response && response.data && typeof response.data === 'object') {
+          const entry = response.data;
           const attributes = entry.attributes || entry;
           if (attributes.txt) {
             const html = convertStrapiRichTextToHtml(attributes.txt);

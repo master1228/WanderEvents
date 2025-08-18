@@ -24,24 +24,24 @@
     font-size: 1.3rem;
     font-weight: bold;
     text-transform: uppercase;
-
-    margin-bottom: 0; // Removed space
-    letter-spacing: 2px; // Made font wider
+    margin-bottom: 0;
+    letter-spacing: 2px;
   }
   position: fixed;
   top: 0;
   left: 0;
   width: 280px;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.1); // Lighter glass effect
+  // Возвращаем оригинальный стеклянный фон меню
+  background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(255, 255, 255, 0.2); // Subtle white border
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 1003;
-  padding-top: 15px; // Further reduced top padding
+  padding-top: 15px;
 
   &.open {
     transform: translateX(0);
@@ -54,14 +54,15 @@
   }
 
   li {
-    margin-bottom: 15px; // Space between buttons
+    margin-bottom: 15px;
 
     a {
       display: block;
       padding: 15px;
-      background-color: rgba(255, 255, 255, 0.1); // Frosted glass background
-      border: none; // Use box-shadow for a complex border
-      border-radius: 18px; // Smoother, Apple-like corners
+      // Простой стеклянный эффект без backdrop-filter
+      background-color: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
       color: white;
       text-align: center;
       text-transform: uppercase;
@@ -70,24 +71,21 @@
       font-weight: 600;
       letter-spacing: 2px;
       transition: all 0.3s ease;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      // New 3D glass border effect with top highlight
-      box-shadow: 
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.25), // Top highlight
-        inset 0 0 0 1px rgba(255, 255, 255, 0.2),   // Main thin border
-        0 4px 15px rgba(0, 0, 0, 0.2);             // Softer, deeper drop shadow
+      // Простая тень без сложных эффектов
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 
       &.active,
       &:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        transform: translateY(-2px) scale(1.03); // Add a slight lift
-        // Enhanced glow effect
-        box-shadow: 
-          inset 0 1.5px 2px rgba(255, 255, 255, 0.5), // Brighter top highlight
-          inset 0 0 0 1.5px rgba(255, 255, 255, 0.4), // Brighter main border
-          0 6px 20px rgba(0, 0, 0, 0.3);              // Deeper shadow on lift
+        background-color: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-2px);
+        // Простое свечение
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
       }
+
+      // Дополнительная безопасность для iOS - убираем any webkit стили
+      -webkit-appearance: none;
+      -webkit-tap-highlight-color: transparent;
     }
   }
 }

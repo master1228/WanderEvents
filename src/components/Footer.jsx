@@ -24,11 +24,12 @@ const Footer = () => {
           fetchFooterLinks(locale),
           fetchSocialLinks(locale),
         ]);
-        if (footerData.data && footerData.data.length > 0) {
-          setFooterLinks(footerData.data[0]);
+        // Single Types возвращают объект, а не массив
+        if (footerData.data && typeof footerData.data === 'object') {
+          setFooterLinks(footerData.data);
         }
-        if (socialData.data && socialData.data.length > 0) {
-          setSocialLinks(socialData.data[0]);
+        if (socialData.data && typeof socialData.data === 'object') {
+          setSocialLinks(socialData.data);
         }
       } catch (error) {
         console.error('Failed to fetch footer data:', error);

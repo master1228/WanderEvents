@@ -17,8 +17,9 @@ const AgreementModal = ({ isOpen, onClose }) => {
         setContent(''); // Reset content to show loading spinner
         try {
           const response = await fetchAgreement(locale);
-          if (response.data && response.data.length > 0 && response.data[0].agr) {
-            const contentArray = response.data[0].agr;
+          // Single Type возвращает объект, а не массив
+          if (response.data && typeof response.data === 'object' && response.data.agr) {
+            const contentArray = response.data.agr;
             const htmlContent = contentArray.map(block => {
               if (block.type === 'paragraph') {
                 const text = block.children.map(child => child.text).join('');

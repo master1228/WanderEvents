@@ -4,42 +4,47 @@
 import tokenManager from './tokenManager';
 
 // Try to load local dev override first (only in development)
-/* eslint-disable global-require */
 let localConfig = null;
 if (process.env.NODE_ENV !== 'production') {
   try {
-    // Use dynamic eval so webpack doesn't bundle the file in production
-    // eslint-disable-next-line no-eval
-    localConfig = eval("require('../strapi.local.example')").default;
+    // Only try to load in development
+    localConfig = require('../strapi.local.example').default;
   } catch {
     // File absent – fall back to .env
     localConfig = null;
   }
 }
-/* eslint-enable global-require */
 
 // --- Server Configuration ---
-const REMOTE_API_URL = 'https://wandereventscms.onrender.com/api';
 const LOCAL_API_URL = 'http://localhost:1337/api';
 const LOCAL_API_TOKEN = localConfig?.LOCAL_API_TOKEN || process.env.REACT_APP_STRAPI_LOCAL_TOKEN || '';
 
 // DEBUG: log API configuration
 console.log('Strapi API Configuration:', {
-  REMOTE_URL: REMOTE_API_URL,
   LOCAL_URL: LOCAL_API_URL,
   LOCAL_TOKEN_PRESENT: Boolean(LOCAL_API_TOKEN),
   TOKEN_MANAGER: 'Enabled (fetches from server)',
+  DYNAMIC_REMOTE_URL: 'Enabled (from server config)',
 });
 
 export async function strapiFetch(endpoint, { method = 'GET', body } = {}, locale = 'ru') {
   const separator = endpoint.includes('?') ? '&' : '?';
   const localizedEndpoint = `${endpoint}${separator}locale=${locale}`;
 
-  // Получаем актуальный токен с сервера
-  const remoteToken = await tokenManager.fetchCurrentToken();
+  // Получаем актуальную конфигурацию (URL и токен) с сервера
+  let remoteApiUrl, remoteToken;
+  try {
+    const config = await tokenManager.fetchCurrentConfig();
+    remoteApiUrl = config.apiUrl;
+    remoteToken = config.token;
+  } catch (error) {
+    console.warn('Failed to fetch config from server, using fallback:', error.message);
+    remoteApiUrl = 'http://3.67.79.126:1337/api'; // fallback URL
+    remoteToken = process.env.REACT_APP_STRAPI_TOKEN || '';
+  }
 
   const servers = [
-    { url: REMOTE_API_URL, token: remoteToken },       // Primary: remote server (dynamic token)
+    { url: remoteApiUrl, token: remoteToken },         // Primary: remote server (dynamic config)
     { url: LOCAL_API_URL, token: LOCAL_API_TOKEN },    // Fallback: local dev Strapi
   ];
 
@@ -70,15 +75,22 @@ export async function strapiFetch(endpoint, { method = 'GET', body } = {}, local
 
 // Update fetch functions to accept and pass locale
 export const fetchEvents = (locale) => strapiFetch('/events?populate=*', {}, locale);
-export const fetchFooterLinks = (locale) => strapiFetch('/ftrs?populate=*', {}, locale);
-export const fetchSocialLinks = (locale) => strapiFetch('/scls?populate=*', {}, locale);
-export const fetchVideo = (locale) => strapiFetch('/videos?populate=*', {}, locale);
-export const fetchAbout = (locale) => strapiFetch('/abous?populate=*', {}, locale);
-export const fetchAgreement = (locale) => strapiFetch('/agrs?populate=*', {}, locale);
+// Single Types используют единственное число (без 's' в конце)
+export const fetchFooterLinks = (locale) => strapiFetch('/ftr?populate=*', {}, locale);
+export const fetchSocialLinks = (locale) => strapiFetch('/scl?populate=*', {}, locale);
+export const fetchVideo = (locale) => strapiFetch('/video?populate=*', {}, locale);
+export const fetchAbout = (locale) => strapiFetch('/abou?populate=*', {}, locale);
+export const fetchAgreement = (locale) => strapiFetch('/agr?populate=*', {}, locale);
 // Additional helpers can be added here (e.g., fetchSingleEvent, createTicket, etc.)
 
-export function getStrapiBaseUrl() {
-  return REMOTE_API_URL.replace(/\/api\/?$/, '');
+export async function getStrapiBaseUrl() {
+  try {
+    const apiUrl = await tokenManager.fetchCurrentApiUrl();
+    return apiUrl.replace(/\/api\/?$/, '');
+  } catch (error) {
+    console.warn('Failed to get API URL, using fallback:', error.message);
+    return 'http://3.67.79.126:1337'; // fallback base URL
+  }
 }
 
 // Экспортируем tokenManager для использования в админ-панели

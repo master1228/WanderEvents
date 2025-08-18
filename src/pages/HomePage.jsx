@@ -25,9 +25,10 @@ const HomePage = () => {
         const data = await fetchEvents(locale);
 
         if (data && Array.isArray(data.data)) {
+          // Получаем базовый URL асинхронно один раз перед обработкой
+          const strapiBaseUrl = await getStrapiBaseUrl();
+          
           const formatted = data.data.map((item, index) => {
-
-            const strapiBaseUrl = getStrapiBaseUrl();
             // Prioritize img_url, then fall back to the uploaded image
             const imageUrl = item.img_url || (item.image && (item.image.url || item.image.formats?.thumbnail?.url)
               ? `${strapiBaseUrl}${item.image.url || item.image.formats.thumbnail.url}`

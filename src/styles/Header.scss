@@ -1,34 +1,42 @@
-/* Header Component Styles - Based on ogbuda.com */
+/* Header Component Styles - Centered & Responsive */
 
 .header {
+  // Flexbox центрирование - современный подход
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
   top: 20px;
   left: 50%;
-  transform: translateX(calc(-50% - 2px)); // Shift desktop header left by 2px
+  transform: translateX(calc(-50% - 2px)); // Сдвиг на 2px влево для визуального баланса
   z-index: 1000;
   padding: 0.8rem 2rem;
-  max-width: 90%;
+  max-width: min(90%, 800px); // Ограничиваем максимальную ширину
   width: auto;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   
+  // Обеспечиваем плавную адаптацию
+  transition: all 0.3s ease;
+  
   &__container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; // Трехколоночная сетка для десктопа
     align-items: center;
-    justify-content: center; // Changed to center
-    gap: 2rem; // Keep or adjust as needed
     width: 100%;
+    min-width: 300px; // Минимальная ширина для стабильности
+    gap: 1.5rem; // Расстояние между элементами
   }
   
   &__brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-self: center; // Центрируем в своей колонке
+    
+    // Позиционирование в grid только на больших экранах
+    @media (min-width: 993px) {
+      grid-column: 2; // Центральная колонка на десктопе
+    }
     
     &-text {
       font-size: 1.5rem;
@@ -37,6 +45,7 @@
       transition: color 0.3s ease;
       letter-spacing: 1px;
       text-transform: uppercase;
+      white-space: nowrap;
       
       &:hover {
         color: var(--color-primary);
@@ -47,19 +56,31 @@
   &__nav {
     display: flex;
     align-items: center;
-    width: 90px; // Even narrower default width for EN/RU
+    max-width: 120px; // Ограничиваем максимальную ширину
 
     // Language-specific adjustment for Polish
     html[lang="pl"] & {
-      width: 100px;
+      max-width: 130px;
     }
 
-    &.header__nav-left {
-      justify-content: flex-end;
+    // Показываем навигацию только на больших экранах
+    @media (min-width: 993px) {
+      display: flex;
+      
+      &.header__nav-left {
+        grid-column: 1; // Первая колонка
+        justify-content: flex-end; // Прижимаем к центру
+      }
+
+      &.header__nav-right {
+        grid-column: 3; // Третья колонка
+        justify-content: flex-start; // Прижимаем к центру
+      }
     }
 
-    &.header__nav-right {
-      justify-content: flex-start;
+    // Скрываем на планшетах и мобильных
+    @media (max-width: 992px) {
+      display: none !important;
     }
 
     &-list {
@@ -106,38 +127,99 @@
 @media (max-width: 992px) {
   .header {
     &__container {
-      max-width: 90%; // Reverted to simpler max-width adjustment
+      display: grid;
+      grid-template-columns: 1fr; // Одна колонка на планшетах
+      justify-items: center;
+      gap: 0;
+    }
+
+    &__brand {
+      grid-column: 1; // Единственная колонка на планшетах
+      justify-self: center;
+      
+      &-text {
+        font-size: 1.3rem; // Чуть меньше для планшетов
+      }
+    }
+
+    // Навигация скрывается глобальным медиа-запросом
+  }
+}
+
+// Мобильная оптимизация - идеальное центрирование
+@media (max-width: 768px) {
+  .header {
+    padding: 0.5rem 0.5rem;
+    width: auto;
+    min-width: 150px; // Радикально уменьшена минимальная ширина
+    max-width: calc(100vw - 240px); // Радикально уменьшено - освобождаем много места для кнопок
+
+    &__container {
+      display: grid;
+      grid-template-columns: 1fr; // Одна колонка на мобильном
+      justify-items: center; // Центрируем содержимое
+      padding: 0;
+      width: 100%;
+    }
+
+    &__brand {
+      // На мобильных просто центрируемся в единственной колонке
+      justify-self: center;
+      
+      &-text {
+        font-size: 1.2rem;
+        white-space: nowrap; // Предотвращаем перенос текста
+      }
+    }
+
+    // Навигация уже скрыта глобальным медиа-запросом
+  }
+}
+
+// Агрессивная оптимизация для очень узких экранов
+@media (max-width: 435px) {
+  .header {
+    &__brand {
+      &-text {
+        font-size: 1rem; // Сильно уменьшен размер шрифта
+        letter-spacing: 0.5px;
+      }
     }
   }
 }
 
-@media (max-width: 768px) {
+// Для совсем маленьких экранов
+@media (max-width: 380px) {
   .header {
-    margin-left: -6px; // Shift mobile header left by additional 2px
-    width: auto;
-    padding: 0.6rem 1.2rem;
-    height: auto;
-
-    &__container {
-      width: auto;
-      justify-content: center;
-      gap: 0;
-      padding: 0;
+    &__brand {
+      &-text {
+        font-size: 0.85rem; // Еще более агрессивное уменьшение
+        letter-spacing: 0.4px; // Уменьшен интервал между буквами
+      }
     }
+  }
+}
 
-
-
-    &__brand-text {
-      font-size: 1.2rem;
-      margin: 0;
+// Для экранов меньше 320px
+@media (max-width: 320px) {
+  .header {
+    &__brand {
+      &-text {
+        font-size: 0.75rem; // Очень маленький размер
+        letter-spacing: 0.2px;
+      }
     }
+  }
+}
 
-    &__nav {
-      display: none !important;
-    }
-
-    &__mobile-button {
-      display: none !important;
+// Для очень маленьких экранов
+@media (max-width: 280px) {
+  .header {
+    &__brand {
+      &-text {
+        font-size: 0.65rem; // Минимально возможный размер
+        letter-spacing: 0.1px;
+      }
     }
   }
 }

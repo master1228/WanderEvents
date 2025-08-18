@@ -1,9 +1,9 @@
 .mobile-menu-container {
-  // Default styles for desktop
+  // Default styles for desktop - выравнивание с LanguageSwitcher
   display: block;
   position: fixed;
-  top: calc(28px + 0.2rem); // Match LanguageSwitcher's vertical position
-  left: 27px;               // Decreased by another 5px
+  top: calc(28px + 0.2rem); // Совпадает с LanguageSwitcher
+  left: 40px;               // Одинаковые отступы слева и справа
   z-index: 1001;
 }
 
@@ -37,15 +37,15 @@
   }
 }
 
-// Mobile-specific overrides
+// Mobile-specific overrides - одинаковые отступы
 @media (max-width: 768px) {
   .mobile-menu-container {
-    top: 26px;
-    left: 26px;
+    top: calc(23px + 0.2rem); // Совпадает с LanguageSwitcher mobile
+    left: 31px;              // Одинаковые отступы как у LanguageSwitcher
   }
 
   .mobile-menu-button {
-    width: 43px;
-    height: 43px;
+    width: 2.7rem;  // Совпадает с LanguageSwitcher mobile
+    height: 2.7rem; // Совпадает с LanguageSwitcher mobile
   }
 }
