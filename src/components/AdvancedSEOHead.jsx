@@ -46,11 +46,24 @@ const AdvancedSEOHead = ({
     return `${DOMAIN}/${basePath || ''}`.replace(/\/$/, '') || DOMAIN;
   }, [DOMAIN, pagePath, location.pathname]);
 
+  // Определяем тип страницы для правильных SEO переводов
+  const currentPath = pagePath || location.pathname;
+  const isMerchPage = currentPath.includes('/merch');
+
   useEffect(() => {
-    // Получаем переводы для SEO
-    const seoTitle = customTitle || t('seo.title', { defaultValue: 'WanderEvents — Book concerts & festivals' });
-    const seoDescription = customDescription || t('seo.description', { defaultValue: 'Book tickets for concerts and festivals across Europe' });
-    const seoKeywords = t('seo.keywords', { defaultValue: 'wanderevents, concerts, festivals, tickets' });
+    
+    // Получаем переводы для SEO в зависимости от типа страницы
+    const seoTitle = customTitle || (isMerchPage 
+      ? t('seo.merch.title', { defaultValue: 'WanderEvents Merch — Official Merchandise' })
+      : t('seo.title', { defaultValue: 'WanderEvents — Book concerts & festivals' }));
+    
+    const seoDescription = customDescription || (isMerchPage 
+      ? t('seo.merch.description', { defaultValue: 'Shop official WanderEvents merchandise and accessories' })
+      : t('seo.description', { defaultValue: 'Book tickets for concerts and festivals across Europe' }));
+    
+    const seoKeywords = isMerchPage 
+      ? t('seo.merch.keywords', { defaultValue: 'wanderevents merch, official merchandise, t-shirts, accessories' })
+      : t('seo.keywords', { defaultValue: 'wanderevents, concerts, festivals, tickets' });
 
     // Устанавливаем базовые мета-теги
     document.title = seoTitle;
@@ -98,7 +111,9 @@ const AdvancedSEOHead = ({
       // Open Graph - расширенный набор
       { property: 'og:site_name', content: 'WanderEvents' },
       { property: 'og:locale', content: locale === 'ru' ? 'ru_RU' : locale === 'pl' ? 'pl_PL' : 'en_US' },
-      { property: 'og:title', content: t('seo.og_title', { defaultValue: seoTitle }) },
+      { property: 'og:title', content: isMerchPage 
+        ? t('seo.merch.og_title', { defaultValue: seoTitle })
+        : t('seo.og_title', { defaultValue: seoTitle }) },
       { property: 'og:description', content: seoDescription },
       { property: 'og:url', content: getPageUrl() },
       { property: 'og:type', content: pageType },
@@ -114,7 +129,9 @@ const AdvancedSEOHead = ({
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@wanderevents' },
       { name: 'twitter:creator', content: '@wanderevents' },
-      { name: 'twitter:title', content: t('seo.twitter_title', { defaultValue: seoTitle }) },
+      { name: 'twitter:title', content: isMerchPage 
+        ? t('seo.merch.twitter_title', { defaultValue: seoTitle })
+        : t('seo.twitter_title', { defaultValue: seoTitle }) },
       { name: 'twitter:description', content: seoDescription },
       { name: 'twitter:image', content: `${DOMAIN}/assets/icons/favicon-96x96.png` },
       { name: 'twitter:image:alt', content: 'WanderEvents Logo - Concert & Festival Tickets' },
@@ -391,7 +408,7 @@ const AdvancedSEOHead = ({
     return () => {
       // Теги будут очищены при следующем рендере
     };
-  }, [locale, t, pagePath, location.pathname, customTitle, customDescription, structuredData, pageType, DOMAIN, getPageUrl, getDefaultUrl, languages, events, breadcrumbs]);
+  }, [locale, t, pagePath, location.pathname, customTitle, customDescription, structuredData, pageType, DOMAIN, getPageUrl, getDefaultUrl, languages, events, breadcrumbs, isMerchPage]);
 
   return null; // Компонент не рендерит ничего видимого
 };

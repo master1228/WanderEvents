@@ -9,16 +9,19 @@ const BUILD_DIR = path.join(__dirname, '..', 'build');
 const pages = [
   // Русские страницы (x-default)
   { url: '/', changefreq: 'daily', priority: '1.0' },
+  { url: '/merch', changefreq: 'weekly', priority: '0.9' },
   { url: '/welcome', changefreq: 'weekly', priority: '0.8' },
   { url: '/faq/brand', changefreq: 'monthly', priority: '0.6' },
   
   // Английские страницы
   { url: '/en/', changefreq: 'daily', priority: '1.0' },
+  { url: '/en/merch', changefreq: 'weekly', priority: '0.9' },
   { url: '/en/welcome', changefreq: 'weekly', priority: '0.8' },
   { url: '/en/faq/brand', changefreq: 'monthly', priority: '0.6' },
   
   // Польские страницы  
   { url: '/pl/', changefreq: 'daily', priority: '1.0' },
+  { url: '/pl/merch', changefreq: 'weekly', priority: '0.9' },
   { url: '/pl/welcome', changefreq: 'weekly', priority: '0.8' },
   { url: '/pl/faq/brand', changefreq: 'monthly', priority: '0.6' }
 ];

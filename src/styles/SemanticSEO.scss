@@ -42,7 +42,7 @@
   transition: all 0.2s ease;
   
   &:focus {
-    outline: 3px solid #ff6b35;
+    outline: 3px solid #e50000;
     outline-offset: 2px;
   }
 }
@@ -79,15 +79,15 @@
     
     &:hover,
     &:focus {
-      color: #ff6b35;
+      color: #e50000;
       text-decoration: underline;
-      outline: 1px solid rgba(255, 107, 53, 0.5);
+      outline: 1px solid rgba(229, 0, 0, 0.5);
       outline-offset: 2px;
     }
   }
 
   .breadcrumb-current {
-    color: #ff6b35;
+    color: #e50000;
     font-weight: 500;
   }
 
@@ -112,11 +112,10 @@
   position: relative;
   
   .main-content {
-    outline: none; // Remove default focus outline since we handle it ourselves
+    outline: none !important; // Remove default focus outline since we handle it ourselves
     
     &:focus {
-      outline: 2px solid rgba(255, 107, 53, 0.5);
-      outline-offset: 4px;
+      outline: none !important; // Убираем видимую обводку при клике на фон
     }
   }
 }
@@ -129,7 +128,7 @@
   // Ensure focusable elements have proper focus styles
   a, button, input, textarea, select {
     &:focus {
-      outline: 2px solid #ff6b35;
+      outline: 2px solid #e50000;
       outline-offset: 2px;
     }
   }

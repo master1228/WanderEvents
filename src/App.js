@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import BrandFAQPage from './pages/BrandFAQPage';
+import MerchPage from './pages/MerchPage';
 import Footer from './components/Footer';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import MobileMenu from './components/MobileMenu';
@@ -87,6 +88,18 @@ const App = () => {
                   </SemanticPageWrapper>
                 </LanguageRoute>
               } />
+              <Route path="/merch" element={
+                <LanguageRoute language="ru">
+                  <AdvancedSEOHead pageType="website" pagePath="merch" />
+                  <SemanticPageWrapper 
+                    pageType="shop" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <MerchPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
 
               {/* Английский язык */}
               <Route path="/en/" element={
@@ -129,6 +142,18 @@ const App = () => {
                   </SemanticPageWrapper>
                 </LanguageRoute>
               } />
+              <Route path="/en/merch" element={
+                <LanguageRoute language="en">
+                  <AdvancedSEOHead pageType="website" pagePath="merch" />
+                  <SemanticPageWrapper 
+                    pageType="shop" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <MerchPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
 
               {/* Польский язык */}
               <Route path="/pl/" element={
@@ -168,6 +193,18 @@ const App = () => {
                     headerLevel={1}
                   >
                     <BrandFAQPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+              <Route path="/pl/merch" element={
+                <LanguageRoute language="pl">
+                  <AdvancedSEOHead pageType="website" pagePath="merch" />
+                  <SemanticPageWrapper 
+                    pageType="shop" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <MerchPage />
                   </SemanticPageWrapper>
                 </LanguageRoute>
               } />

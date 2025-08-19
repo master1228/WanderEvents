@@ -1,0 +1,973 @@
+// Merch Page Styles
+.merch-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+  padding: 0;
+  color: #ffffff;
+  font-family: 'Roboto Mono', monospace;
+  position: relative;
+  overflow-x: hidden;
+
+  // Прямой фон как на главной странице
+  background-image: url('../assets/images/backgr5.png');
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  background-attachment: scroll;
+  padding-bottom: 100px; /* Отступ снизу как на главной */
+  
+  // Убираем все возможные outline'ы на странице мерча
+  *, *:focus, *:active, *:hover {
+    outline: none !important;
+  }
+
+  .merch-hero {
+    text-align: center;
+    height: 1200px; /* Увеличиваем высоту на 200px для размещения опущенного текста */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 400px 0 50px; /* Увеличиваем верхний отступ еще на 200px (было 200px, стало 400px) */
+    position: relative;
+    
+    .merch-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 
+                   0 0 20px rgba(0, 0, 0, 0.6);
+      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      padding: 0 10px; /* Добавляем боковые отступы по 10px */
+
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+        padding: 0 10px; /* Боковые отступы на планшетах */
+      }
+
+      @media (max-width: 480px) {
+        font-size: 2rem;
+        padding: 0 10px; /* Боковые отступы на телефонах */
+      }
+    }
+
+     .merch-subtitle {
+       font-size: 1.2rem;
+       color: rgba(255, 255, 255, 0.8);
+       font-weight: 300;
+       letter-spacing: 0.5px;
+       text-align: center;
+       padding: 0 10px; /* Добавляем боковые отступы по 10px */
+
+       @media (max-width: 768px) {
+         font-size: 1rem;
+         padding: 0 10px; /* Боковые отступы на планшетах */
+       }
+       
+       @media (max-width: 480px) {
+         padding: 0 10px; /* Боковые отступы на телефонах */
+       }
+     }
+
+     // Responsive styles для hero секции как на главной
+     @media (max-width: 768px) {
+       height: 1000px; /* Увеличиваем высоту для размещения опущенного текста */
+       padding: 380px 0 40px; /* Увеличиваем верхний отступ еще на 200px */
+     }
+
+     @media (max-width: 480px) {
+       height: 900px; /* Увеличиваем высоту для размещения опущенного текста */
+       padding: 360px 0 30px; /* Увеличиваем верхний отступ еще на 200px */
+     }
+   }
+
+  .merch-filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem; /* Уменьшаем отступ снизу (было 3rem, стало 1rem) */
+    margin-top: -10rem; /* Увеличиваем расстояние до заголовка (было -14rem, стало -10rem) */
+    padding: 0 20px; /* Те же отступы что у events-list */
+    
+    @media (max-width: 768px) {
+      padding: 0 30px; /* Увеличиваем боковые отступы на планшетах */
+    }
+    
+    @media (max-width: 480px) {
+      padding: 0 30px; /* Увеличиваем боковые отступы на телефонах (было 20px + 10px) */
+    }
+    
+    @media (max-width: 375px) {
+      padding: 0 30px; /* Отступы для маленьких телефонов (было 20px + 10px) */
+    }
+    
+    @media (max-width: 320px) {
+      padding: 0 25px; /* Минимальные отступы для очень маленьких экранов (было 20px + 5px) */
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.5rem;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      margin: 0 auto;
+      max-width: fit-content;
+
+      @media (max-width: 768px) {
+        gap: 0.5rem;
+        padding: 0.3rem;
+        margin: 0 10px; /* Дополнительные отступы от краев */
+        transform: scale(0.95); /* Небольшое уменьшение для планшетов */
+      }
+      
+      @media (max-width: 600px) {
+        gap: 0.4rem;
+        padding: 0.25rem;
+        margin: 0 12px;
+        transform: scale(0.9); /* Уменьшение для узких планшетов */
+        
+        // Русский и английский языки: увеличиваем на 20%
+        &[data-locale="ru"], &[data-locale="en"] {
+          transform: scale(1.08) !important; /* 0.9 * 1.2 = 1.08 */
+        }
+        
+        // Польский язык: увеличиваем на 10%
+        &[data-locale="pl"] {
+          transform: scale(0.99) !important; /* 0.9 * 1.1 = 0.99 */
+        }
+      }
+      
+              @media (max-width: 480px) {
+          gap: 0.3rem;
+          padding: 0.2rem;
+          justify-content: center;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          margin: 0 15px;
+          
+          // Дефолт для других языков
+          transform: scale(0.85);
+          
+          // Русский и английский языки: увеличиваем на 20% (с 0.85 до 1.02)
+          &[data-locale="ru"], &[data-locale="en"] {
+            transform: scale(1.02) !important;
+          }
+          
+          // Польский язык: увеличиваем на 10% (с 0.85 до 0.935)  
+          &[data-locale="pl"] {
+            transform: scale(0.935) !important;
+          }
+          
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+      
+      @media (max-width: 375px) {
+        gap: 0.2rem;
+        padding: 0.15rem;
+        margin: 0 20px; /* Еще больше отступы от краев */
+        transform: scale(0.8); /* Усиливаем уменьшение до 20% */
+      }
+      
+      @media (max-width: 350px) {
+        gap: 0.15rem;
+        padding: 0.1rem;
+        margin: 0 22px;
+        transform: scale(0.75); /* Еще больше уменьшение для узких экранов */
+      }
+      
+      @media (max-width: 320px) {
+        margin: 0 25px; /* Максимальные отступы для маленьких экранов */
+        transform: scale(0.7); /* Максимальное уменьшение до 30% */
+        gap: 0.1rem;
+        padding: 0.05rem;
+      }
+    }
+
+         .filter-btn {
+       background: transparent;
+       border: none;
+       color: rgba(255, 255, 255, 0.7);
+       padding: 0.75rem 1.5rem;
+       border-radius: 25px;
+       cursor: pointer;
+       transition: all 0.3s ease;
+       font-size: 0.9rem;
+       font-weight: 500;
+       white-space: nowrap;
+       position: relative;
+       overflow: hidden;
+       display: flex;
+       align-items: center;
+       gap: 0.5rem;
+       
+       // Адаптация для английского и польского языков
+       @media (max-width: 768px) {
+         padding: 0.6rem 1.2rem;
+         font-size: 0.85rem;
+       }
+       
+       @media (max-width: 600px) {
+         padding: 0.55rem 1rem;
+         font-size: 0.8rem;
+       }
+       
+       @media (max-width: 480px) {
+         padding: 0.5rem 1rem;
+         font-size: 0.8rem;
+         gap: 0.3rem;
+       }
+       
+       @media (max-width: 375px) {
+         padding: 0.4rem 0.8rem;
+         font-size: 0.75rem;
+         gap: 0.25rem;
+       }
+       
+       @media (max-width: 350px) {
+         padding: 0.4rem 0.7rem;
+         font-size: 0.72rem;
+         gap: 0.2rem;
+       }
+       
+       @media (max-width: 320px) {
+         padding: 0.3rem 0.5rem;
+         font-size: 0.65rem;
+         gap: 0.15rem;
+         min-width: auto; /* Убираем минимальную ширину */
+         flex-shrink: 1; /* Позволяем сжиматься */
+       }
+       
+       .filter-text {
+         flex: 1;
+         
+         .filter-text-short {
+           display: none;
+         }
+         
+         .filter-text-full {
+           display: inline;
+         }
+         
+         // Включаем короткий текст на средних экранах для длинных названий
+         @media (max-width: 600px) {
+           .filter-text-full {
+             display: none;
+           }
+           
+           .filter-text-short {
+             display: inline;
+           }
+         }
+       }
+       
+       .filter-count {
+         background: rgba(255, 255, 255, 0.2);
+         color: rgba(255, 255, 255, 0.9);
+         font-size: 0.75rem;
+         font-weight: 600;
+         padding: 0.2rem 0.5rem;
+         border-radius: 12px;
+         min-width: 20px;
+         text-align: center;
+         transition: all 0.3s ease;
+       }
+
+       &:hover {
+         color: #e50000;
+         background: rgba(229, 0, 0, 0.1);
+         transform: translateY(-2px);
+         
+         .filter-count {
+           background: rgba(229, 0, 0, 0.3);
+           color: #ffffff;
+         }
+       }
+
+       &:active {
+         animation: filterPulse 0.3s ease;
+       }
+
+       &.active {
+         background: linear-gradient(45deg, #e50000, #cc0000);
+         color: #ffffff;
+         box-shadow: 0 4px 20px rgba(229, 0, 0, 0.3);
+         transform: translateY(-2px);
+         
+         .filter-count {
+           background: rgba(255, 255, 255, 0.3);
+           color: #ffffff;
+         }
+         
+         &::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: -100%;
+           width: 100%;
+           height: 100%;
+           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+           animation: shimmer 1.5s ease-in-out infinite;
+         }
+       }
+
+      @media (max-width: 768px) {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        gap: 0.3rem;
+        
+        .filter-count {
+          font-size: 0.7rem;
+          padding: 0.15rem 0.4rem;
+          min-width: 18px;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+        gap: 0.25rem;
+        min-width: auto;
+        flex-shrink: 0;
+        
+        .filter-text {
+          white-space: nowrap;
+        }
+        
+        .filter-count {
+          font-size: 0.65rem;
+          padding: 0.1rem 0.35rem;
+          min-width: 16px;
+        }
+      }
+      
+      @media (max-width: 375px) {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7rem;
+        gap: 0.2rem;
+        
+        .filter-text {
+          .filter-text-full {
+            display: none;
+          }
+          
+          .filter-text-short {
+            display: inline;
+          }
+        }
+        
+        .filter-count {
+          font-size: 0.6rem;
+          padding: 0.08rem 0.3rem;
+          min-width: 14px;
+        }
+      }
+      
+      @media (max-width: 320px) {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.65rem;
+        gap: 0.15rem;
+        
+        .filter-text {
+          .filter-text-full {
+            display: none;
+          }
+          
+          .filter-text-short {
+            display: inline;
+          }
+        }
+        
+        .filter-count {
+          font-size: 0.55rem;
+          padding: 0.05rem 0.25rem;
+          min-width: 12px;
+        }
+      }
+    }
+  }
+
+  // Стили для "SOLDOUT" блока
+  .soldout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+    max-width: 1080px;
+    margin: 0 auto 4rem;
+    padding: 3rem 2rem;
+    
+    .soldout-main {
+      font-size: 4rem;
+      font-weight: 900;
+      color: #e50000;
+      text-shadow: 0 0 20px rgba(229, 0, 0, 0.5),
+                   2px 2px 8px rgba(0, 0, 0, 0.8);
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      animation: soldoutPulse 3s ease-in-out infinite;
+      
+      @media (max-width: 768px) {
+        font-size: 2.8rem;
+        letter-spacing: 1px;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 2.2rem;
+        letter-spacing: 0.5px;
+      }
+    }
+    
+    .soldout-subtitle {
+      font-size: 1.4rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+      
+      @media (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+    }
+  }
+
+  .merch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    max-width: 1080px; /* Та же ширина что у event-card */
+    margin: 0 auto 4rem;
+    padding: 0 20px; /* Те же отступы что у events-list */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    
+    &.animating {
+      opacity: 0.7;
+      transform: translateY(10px);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .merch-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: visible;
+    backdrop-filter: blur(8px);
+    min-height: 550px; /* Уменьшаем высоту карточки */
+    max-width: 470px; /* Увеличиваем ширину еще на 50px (было 420px, стало 470px) */
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto; /* Центрируем карточку */
+    
+    // Анимация появления карточек
+    animation: slideInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+    
+    .merch-grid:not(.animating) & {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 107, 53, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+
+      .merch-image img {
+        transform: scale(1.02);
+      }
+    }
+
+    &.out-of-stock {
+      opacity: 0.5;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .limited-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(45deg, #ffd700, #ffed4e);
+      color: #000;
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+      animation: pulse-gold 2s infinite;
+
+      @keyframes pulse-gold {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+        50% { box-shadow: 0 0 0 8px rgba(255, 215, 0, 0); }
+      }
+    }
+
+    .merch-image {
+      width: 100%;
+      aspect-ratio: 4/3; /* Соотношение сторон как у постера */
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0; /* Предотвращаем сжатие изображения */
+      
+      /* Fallback для браузеров без поддержки aspect-ratio */
+      @supports not (aspect-ratio: 4/3) {
+        height: 0;
+        padding-bottom: 75%; /* 3/4 = 0.75 = 75% для соотношения 4:3 */
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .stock-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(2px);
+
+        span {
+          color: #ff4444;
+          font-weight: 600;
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .merch-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-bottom: 80px; /* Увеличиваем отступ снизу для кнопки покупки */
+      
+      .merch-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+        height: 3.2rem; /* Увеличиваем высоту для 2-3 строк */
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      .merch-description {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin-bottom: 0.8rem;
+        height: 3.6rem; /* Увеличиваем высоту для 2-3 строк */
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+
+      .merch-details {
+        margin-bottom: 1rem;
+        flex: 1; /* Занимает оставшееся пространство */
+
+        .detail-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.6rem;
+          padding: 0.4rem 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+          &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+          }
+
+          .detail-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+          }
+
+          .detail-value {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: right;
+            max-width: 60%;
+          }
+        }
+      }
+
+            .merch-purchase {
+        position: absolute;
+        bottom: 12px; /* Добавляем отступ от низа карточки */
+        right: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0; /* Убираем дополнительный padding */
+
+        .price {
+          font-size: 1.4rem;
+          font-weight: 700;
+          color: #ffffff; /* Делаем цену белой */
+        }
+
+        .add-to-cart-btn {
+          background: linear-gradient(45deg, #e50000, #cc0000);
+          border: none;
+          color: #ffffff;
+          padding: 0;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 0.8rem;
+          transition: all 0.2s ease;
+          width: 220px; /* Увеличиваем ширину для полного помещения текста */
+          height: 44px; /* Увеличиваем высоту для лучшего отображения текста */
+          letter-spacing: 0.2px;
+          white-space: nowrap;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+
+          &:hover:not(.disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(229, 0, 0, 0.3);
+            background: linear-gradient(45deg, #cc0000, #e50000);
+          }
+
+          &:active:not(.disabled) {
+            transform: translateY(0);
+          }
+
+          &.disabled {
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            
+            &:hover {
+              transform: none;
+              box-shadow: none;
+              background: rgba(255, 255, 255, 0.08);
+            }
+          }
+
+          @media (max-width: 480px) {
+            padding: 0.6rem 0.8rem;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+
+  .merch-info-section {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(255, 107, 53, 0.1);
+        border-color: rgba(255, 107, 53, 0.2);
+      }
+
+      .info-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      h4 {
+        font-size: 1.3rem;
+        color: #ffffff;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  // Loading animations
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes filterPulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+  
+  @keyframes soldoutPulse {
+    0% {
+      text-shadow: 0 0 20px rgba(229, 0, 0, 0.5),
+                   2px 2px 8px rgba(0, 0, 0, 0.8);
+      transform: scale(1);
+    }
+    50% {
+      text-shadow: 0 0 30px rgba(229, 0, 0, 0.8),
+                   2px 2px 12px rgba(0, 0, 0, 0.9),
+                   0 0 40px rgba(229, 0, 0, 0.3);
+      transform: scale(1.02);
+    }
+    100% {
+      text-shadow: 0 0 20px rgba(229, 0, 0, 0.5),
+                   2px 2px 8px rgba(0, 0, 0, 0.8);
+      transform: scale(1);
+    }
+  }
+
+  .merch-card {
+    animation: slideInUp 0.6s ease-out;
+    animation-fill-mode: both;
+
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+
+  // Responsive improvements как на главной странице
+  @media (max-width: 768px) {
+    background-size: 120% auto; 
+    background-position: center top;
+
+    .merch-filters {
+      margin-bottom: 2rem;
+    }
+
+    .merch-grid {
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    background-size: 140% auto; 
+    background-position: center top;
+  }
+
+  @media (min-width: 992px) {
+    background-position: center -50px; // поднимаем фон на 50px для экранов ≥992px
+  }
+
+  @media (min-width: 1400px) {
+    background-position: center -150px; // для больших экранов еще выше
+  }
+
+  @media (max-width: 480px) {
+    .merch-card {
+      padding: 1rem;
+      min-height: 480px; /* Уменьшаем высоту для мобильных */
+      max-width: 430px; /* Увеличиваем ширину еще на 50px (было 380px, стало 430px) */
+
+      .merch-image {
+        aspect-ratio: 4/3; /* Сохраняем пропорции постера на мобильных */
+        margin-bottom: 0.8rem;
+      }
+
+      .merch-info {
+        padding-bottom: 70px; /* Увеличиваем отступ на мобильных */
+        
+        .merch-name {
+          font-size: 1.1rem;
+          height: 2.8rem; /* Увеличиваем высоту для мобильных */
+        }
+
+        .merch-description {
+          font-size: 0.8rem;
+          margin-bottom: 0.6rem;
+          height: 3.2rem; /* Увеличиваем высоту для мобильных */
+        }
+
+        .merch-details {
+          margin-bottom: 0.8rem;
+
+          .detail-item {
+            .detail-label,
+            .detail-value {
+              font-size: 0.75rem;
+            }
+          }
+        }
+
+        .merch-purchase {
+          .price {
+            font-size: 1.2rem;
+            color: #ffffff; /* Белый цвет для мобильных */
+          }
+
+          .add-to-cart-btn {
+            width: 190px; /* Увеличиваем ширину для мобильных чтобы текст помещался */
+            height: 40px; /* Увеличиваем высоту для мобильных */
+            font-size: 0.8rem;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  
+  // Loading и error состояния
+  .loading-container, .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    text-align: center;
+    padding: 2rem;
+    max-width: 1080px;
+    margin: 0 auto;
+    
+    p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1rem;
+      margin: 1rem 0;
+    }
+    
+    button {
+      background: linear-gradient(45deg, #e50000, #cc0000);
+      color: #ffffff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(229, 0, 0, 0.4);
+      }
+    }
+  }
+  
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #e50000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}

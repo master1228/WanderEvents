@@ -10,10 +10,23 @@ const LanguageRoute = ({ children, language }) => {
   const location = useLocation();
 
   useEffect(() => {
-    // Устанавливаем язык на основе маршрута
-    if (language && i18n.language !== language) {
-      i18n.changeLanguage(language);
-      setLocale(language);
+    // Проверяем есть ли сохраненный выбор пользователя
+    const userChoice = localStorage.getItem('userLanguageChoice');
+    
+    if (userChoice) {
+      // Если пользователь выбрал язык - используем его выбор, игнорируем URL
+      console.log('🎯 LanguageRoute: используем выбор пользователя:', userChoice);
+      if (i18n.language !== userChoice) {
+        i18n.changeLanguage(userChoice);
+        setLocale(userChoice);
+      }
+    } else {
+      // Если выбора нет - устанавливаем язык на основе маршрута
+      console.log('🌐 LanguageRoute: устанавливаем язык на основе URL:', language);
+      if (language && i18n.language !== language) {
+        i18n.changeLanguage(language);
+        setLocale(language);
+      }
     }
   }, [language, i18n, setLocale]);
 

@@ -2,6 +2,7 @@
   "header": {
     "return_policy": "Return Policy",
     "events": "EVENTS",
+    "merch": "MERCH",
     "contacts": "ABOUT US"
   },
   "footer": {
@@ -58,7 +59,14 @@
     "keywords": "wanderevents, concerts, festivals, tickets, music events, Europe, online booking",
     "brand_mention": "WanderEvents",
     "og_title": "WanderEvents — Book concerts & festivals across Europe",
-    "twitter_title": "WanderEvents — Book concerts & festivals across Europe"
+    "twitter_title": "WanderEvents — Book concerts & festivals across Europe",
+    "merch": {
+      "title": "Official WanderEvents Merch — T-shirts, Caps, Accessories",
+      "description": "Shop official WanderEvents clothing and accessories. Stylish merch for music lovers: t-shirts, hoodies, caps and more. Fast delivery across Europe.",
+      "keywords": "WanderEvents merch, official clothing, t-shirts, hoodies, caps, accessories, music merchandise, concert apparel",
+      "og_title": "Official WanderEvents Merch — T-shirts, Caps, Accessories",
+      "twitter_title": "Official WanderEvents Merch — Stylish clothing for music lovers"
+    }
   },
   "faq": {
     "brand": {

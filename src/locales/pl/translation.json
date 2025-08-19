@@ -2,6 +2,7 @@
   "header": {
     "return_policy": "Polityka zwrotów",
     "events": "WYDARZENIA",
+    "merch": "MERCH",
     "contacts": "O NAS"
   },
   "footer": {
@@ -60,7 +61,14 @@
     "keywords": "wanderevents, koncerty, festiwale, bilety, wydarzenia muzyczne, Europa, rezerwacja online",
     "brand_mention": "WanderEvents",
     "og_title": "WanderEvents — Bilety na koncerty i festiwale w Europie",
-    "twitter_title": "WanderEvents — Bilety na koncerty i festiwale w Europie"
+    "twitter_title": "WanderEvents — Bilety na koncerty i festiwale w Europie",
+    "merch": {
+      "title": "Oficjalny merch WanderEvents — Koszulki, Czapki, Akcesoria",
+      "description": "Kupuj oficjalną odzież i akcesoria WanderEvents. Stylowy merch dla miłośników muzyki: koszulki, bluzy, czapki i wiele więcej. Szybka dostawa w całej Europie.",
+      "keywords": "WanderEvents merch, oficjalna odzież, koszulki, bluzy, czapki, akcesoria, merchandise muzyczny, odzież koncertowa",
+      "og_title": "Oficjalny merch WanderEvents — Koszulki, Czapki, Akcesoria",
+      "twitter_title": "Oficjalny merch WanderEvents — Stylowa odzież dla miłośników muzyki"
+    }
   },
   "faq": {
     "brand": {
