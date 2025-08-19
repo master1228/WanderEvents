@@ -77,7 +77,7 @@ import ticketIcon from '../assets/icons/ticket.svg';
 
 | Переменная                | Назначение                                         | Пример                             |
 |---------------------------|----------------------------------------------------|------------------------------------|
-| `REACT_APP_API_URL`       | Базовый URL Strapi CMS                             | `https://wandereventscms.onrender.com/api` |
+| `REACT_APP_API_URL`       | Базовый URL Strapi CMS                             | `https://admin.wanderevents.pl/api` |
 | `REACT_APP_API_TOKEN`     | Персональный токен доступа (Strapi → Settings → API Tokens) | `d3cb5...`                       |
 | `REACT_APP_STRAPI_CDN`    | CDN-домен для картинок, если используете Cloudflare | `https://cdn.wanderevents.pl`      |
 
