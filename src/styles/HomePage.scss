@@ -506,3 +506,34 @@
     background-position: center -150px; // desktop: 50px lower than medium
   }
 }
+
+// Brand mention section for SEO only (hidden from users)
+.brand-mention-section {
+  // Скрываем от пользователей, но оставляем для SEO роботов
+  position: absolute;
+  left: -10000px;
+  top: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  
+  // Альтернативный способ скрытия для разных роботов
+  @media screen {
+    display: none !important;
+  }
+  
+  .brand-mention-text {
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    margin: 0;
+    padding: 0;
+
+    strong {
+      color: transparent;
+      font-weight: normal;
+    }
+  }
+}

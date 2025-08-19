@@ -126,7 +126,17 @@ const HomePage = () => {
           </div>
         )}
         {!loading && (
-          <div id="events" className="events-list" ref={eventsRef}>
+          <>
+            {/* Упоминание бренда для русской версии (для SEO) */}
+            {locale === 'ru' && (
+              <div className="brand-mention-section">
+                <p className="brand-mention-text">
+                  <strong>WanderEvents (вандеревентс)</strong> — ваша надёжная платформа для покупки билетов на лучшие концерты и фестивали в Европе.
+                </p>
+              </div>
+            )}
+            
+            <div id="events" className="events-list" ref={eventsRef}>
             {events.map((event, index) => (
               <div className="event-card" key={index}>
                 {event.soldout && (
@@ -163,7 +173,8 @@ const HomePage = () => {
 
               </div>
             ))}
-          </div>
+            </div>
+          </>
         )}
       </div>
       {selectedEvent && (

@@ -53,5 +53,32 @@
     "title": "O nas",
     "text": "WanderEvents to Twój przewodnik po świecie najjaśniejszych i niezapomnianych wydarzeń. Łączymy organizatorów i koneserów jakościowej muzyki, tworząc unikalną platformę do kupowania i sprzedawania biletów. Naszą misją jest uczynienie kultury dostępną, a każde wydarzenie wyjątkowym.\n\nWierzymy, że muzyka i występy na żywo mogą zmieniać świat na lepsze, a nasz zespół pracuje każdego dnia, abyś mógł stać się częścią tej magii. Dołącz do naszej społeczności i odkrywaj nowe horyzonty z WanderEvents!",
     "media_title": "Nasze chwile"
+  },
+  "seo": {
+    "title": "WanderEvents — Bilety na koncerty i festiwale w Europie",
+    "description": "WanderEvents to Twoja zaufana platforma do rezerwacji biletów na koncerty, festiwale i wydarzenia muzyczne w Europie. Szybka i bezpieczna rezerwacja biletów online.",
+    "keywords": "wanderevents, koncerty, festiwale, bilety, wydarzenia muzyczne, Europa, rezerwacja online",
+    "brand_mention": "WanderEvents",
+    "og_title": "WanderEvents — Bilety na koncerty i festiwale w Europie",
+    "twitter_title": "WanderEvents — Bilety na koncerty i festiwale w Europie"
+  },
+  "faq": {
+    "brand": {
+      "title": "O marce WanderEvents",
+      "questions": [
+        {
+          "question": "Czym jest WanderEvents?",
+          "answer": "WanderEvents to wiodąca platforma do rezerwacji biletów na koncerty, festiwale i wydarzenia muzyczne w Europie. Zapewniamy wygodny i bezpieczny sposób rezerwacji biletów online."
+        },
+        {
+          "question": "Jak się wymawia WanderEvents?",
+          "answer": "WanderEvents wymawia się tak, jak się pisze. Możesz także spotkać warianty takie jak \"Wanderevents\" lub \"Wander Events\" w wynikach wyszukiwania."
+        },
+        {
+          "question": "W jakich krajach działa WanderEvents?",
+          "answer": "WanderEvents działa w całej Europie, oferując bilety na wydarzenia w głównych miastach kontynentu. Nasza platforma jest dostępna dla użytkowników na całym świecie."
+        }
+      ]
+    }
   }
 }

@@ -3,13 +3,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
+import BrandFAQPage from './pages/BrandFAQPage';
 import Footer from './components/Footer';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import MobileMenu from './components/MobileMenu';
 import SideMenu from './components/SideMenu';
 import ScrollToTop from './components/ScrollToTop';
+import LanguageRoute from './components/LanguageRoute';
+import AdvancedSEOHead from './components/AdvancedSEOHead';
+import SemanticPageWrapper from './components/SemanticPageWrapper';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import './styles/App.scss';
+import './styles/SemanticSEO.scss';
 
 // This component applies the language attribute to the HTML tag.
 const LanguageEffect = () => {
@@ -41,8 +46,136 @@ const App = () => {
           <Header />
           <main>
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/welcome" element={<LandingPage />} />
+              {/* Русский язык (x-default) - корневые пути */}
+              <Route path="/" element={
+                <LanguageRoute language="ru">
+                  <AdvancedSEOHead pageType="website" pagePath="" />
+                  <SemanticPageWrapper pageType="home" headerLevel={1}>
+                    <HomePage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+              <Route path="/welcome" element={
+                <LanguageRoute language="ru">
+                  <AdvancedSEOHead pageType="website" pagePath="welcome" />
+                  <SemanticPageWrapper 
+                    pageType="about" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <LandingPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+              <Route path="/faq/brand" element={
+                <LanguageRoute language="ru">
+                  <AdvancedSEOHead 
+                    pageType="article" 
+                    pagePath="faq/brand"
+                    structuredData={{
+                      "@context": "https://schema.org",
+                      "@type": "FAQPage",
+                      "mainEntity": []
+                    }}
+                  />
+                  <SemanticPageWrapper 
+                    pageType="faq" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <BrandFAQPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+
+              {/* Английский язык */}
+              <Route path="/en/" element={
+                <LanguageRoute language="en">
+                  <AdvancedSEOHead pageType="website" pagePath="" />
+                  <SemanticPageWrapper pageType="home" headerLevel={1}>
+                    <HomePage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+              <Route path="/en/welcome" element={
+                <LanguageRoute language="en">
+                  <AdvancedSEOHead pageType="website" pagePath="welcome" />
+                  <SemanticPageWrapper 
+                    pageType="about" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <LandingPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+              <Route path="/en/faq/brand" element={
+                <LanguageRoute language="en">
+                  <AdvancedSEOHead 
+                    pageType="article" 
+                    pagePath="faq/brand"
+                    structuredData={{
+                      "@context": "https://schema.org",
+                      "@type": "FAQPage",
+                      "mainEntity": []
+                    }}
+                  />
+                  <SemanticPageWrapper 
+                    pageType="faq" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <BrandFAQPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+
+              {/* Польский язык */}
+              <Route path="/pl/" element={
+                <LanguageRoute language="pl">
+                  <AdvancedSEOHead pageType="website" pagePath="" />
+                  <SemanticPageWrapper pageType="home" headerLevel={1}>
+                    <HomePage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+              <Route path="/pl/welcome" element={
+                <LanguageRoute language="pl">
+                  <AdvancedSEOHead pageType="website" pagePath="welcome" />
+                  <SemanticPageWrapper 
+                    pageType="about" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <LandingPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+              <Route path="/pl/faq/brand" element={
+                <LanguageRoute language="pl">
+                  <AdvancedSEOHead 
+                    pageType="article" 
+                    pagePath="faq/brand"
+                    structuredData={{
+                      "@context": "https://schema.org",
+                      "@type": "FAQPage",
+                      "mainEntity": []
+                    }}
+                  />
+                  <SemanticPageWrapper 
+                    pageType="faq" 
+                    showBreadcrumbs={false}
+                    headerLevel={1}
+                  >
+                    <BrandFAQPage />
+                  </SemanticPageWrapper>
+                </LanguageRoute>
+              } />
+
+              {/* Редирект-маршруты для /ru/ (редиректят на корневые пути) */}
+              <Route path="/ru" element={<LanguageRoute language="ru"><HomePage /></LanguageRoute>} />
+              <Route path="/ru/" element={<LanguageRoute language="ru"><HomePage /></LanguageRoute>} />
+              <Route path="/ru/*" element={<LanguageRoute language="ru"><HomePage /></LanguageRoute>} />
             </Routes>
           </main>
           <Footer />

@@ -51,5 +51,32 @@
     "title": "About Us",
     "text": "WanderEvents is your guide to the world of the brightest and most unforgettable events. We bring together organizers and connoisseurs of quality music, creating a unique platform for buying and selling tickets. Our mission is to make culture accessible and every event special.\n\nWe believe that music and live performances can change the world for the better, and our team works every day so you can be a part of this magic. Join our community and discover new horizons with WanderEvents!",
     "media_title": "Our Moments"
+  },
+  "seo": {
+    "title": "WanderEvents — Book concerts & festivals across Europe",
+    "description": "WanderEvents is your trusted platform for booking tickets to concerts, festivals and music events across Europe. Fast and secure online ticket booking.",
+    "keywords": "wanderevents, concerts, festivals, tickets, music events, Europe, online booking",
+    "brand_mention": "WanderEvents",
+    "og_title": "WanderEvents — Book concerts & festivals across Europe",
+    "twitter_title": "WanderEvents — Book concerts & festivals across Europe"
+  },
+  "faq": {
+    "brand": {
+      "title": "About WanderEvents Brand",
+      "questions": [
+        {
+          "question": "What is WanderEvents?",
+          "answer": "WanderEvents is a leading platform for booking tickets to concerts, festivals and music events across Europe. We provide a convenient and secure way to book tickets online."
+        },
+        {
+          "question": "How do you pronounce WanderEvents?",
+          "answer": "WanderEvents is pronounced as it's written. You might also see variations like \"Wanderevents\" or \"Wander Events\" in search results."
+        },
+        {
+          "question": "In which countries does WanderEvents operate?",
+          "answer": "WanderEvents operates throughout Europe, offering tickets for events in major cities across the continent. Our platform is available to users worldwide."
+        }
+      ]
+    }
   }
 }

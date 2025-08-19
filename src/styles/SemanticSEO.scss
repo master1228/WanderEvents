@@ -1,0 +1,226 @@
+// Semantic SEO and Accessibility Styles
+
+// Screen reader only elements
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Screen reader only elements that become visible on focus (for skip links)
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0.5rem 1rem !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+  z-index: 9999 !important;
+  background: #000 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  border-radius: 4px !important;
+  display: inline-block !important;
+  font-weight: bold !important;
+}
+
+// Skip link positioning
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10000;
+  transition: all 0.2s ease;
+  
+  &:focus {
+    outline: 3px solid #ff6b35;
+    outline-offset: 2px;
+  }
+}
+
+// Breadcrumb navigation
+.breadcrumb-nav {
+  margin: 1rem 0;
+  padding: 0.5rem 0;
+  
+  .breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .breadcrumb-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    
+    &:hover,
+    &:focus {
+      color: #ff6b35;
+      text-decoration: underline;
+      outline: 1px solid rgba(255, 107, 53, 0.5);
+      outline-offset: 2px;
+    }
+  }
+
+  .breadcrumb-current {
+    color: #ff6b35;
+    font-weight: 500;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 0.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+  }
+  
+  // Mobile responsive
+  @media (max-width: 768px) {
+    margin: 0.5rem 0;
+    
+    .breadcrumb-list {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+// Page wrapper semantic styles
+.semantic-page-wrapper {
+  position: relative;
+  
+  .main-content {
+    outline: none; // Remove default focus outline since we handle it ourselves
+    
+    &:focus {
+      outline: 2px solid rgba(255, 107, 53, 0.5);
+      outline-offset: 4px;
+    }
+  }
+}
+
+// Focus management for better accessibility
+.page-type-home,
+.page-type-faq,
+.page-type-about {
+  
+  // Ensure focusable elements have proper focus styles
+  a, button, input, textarea, select {
+    &:focus {
+      outline: 2px solid #ff6b35;
+      outline-offset: 2px;
+    }
+  }
+
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    .breadcrumb-link,
+    .breadcrumb-current {
+      border: 1px solid;
+    }
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    .breadcrumb-link,
+    .skip-link {
+      transition: none;
+    }
+  }
+}
+
+// Dark theme adjustments for breadcrumbs
+@media (prefers-color-scheme: dark) {
+  .breadcrumb-nav {
+    .breadcrumb-list {
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .breadcrumb-link {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .breadcrumb-separator {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+// Light theme adjustments for breadcrumbs
+@media (prefers-color-scheme: light) {
+  .breadcrumb-nav {
+    .breadcrumb-list {
+      color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .breadcrumb-link {
+      color: rgba(0, 0, 0, 0.6);
+      
+      &:hover,
+      &:focus {
+        color: #d55a2a;
+      }
+    }
+    
+    .breadcrumb-current {
+      color: #d55a2a;
+    }
+    
+    .breadcrumb-separator {
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+  
+  .skip-link {
+    &:focus,
+    &:active {
+      background: #fff !important;
+      color: #000 !important;
+      border: 2px solid #000 !important;
+    }
+  }
+}
+
+// Print styles for breadcrumbs
+@media print {
+  .breadcrumb-nav {
+    .breadcrumb-list {
+      color: #000;
+    }
+    
+    .breadcrumb-link {
+      color: #000;
+      text-decoration: none;
+    }
+    
+    .breadcrumb-separator::after {
+      content: " > ";
+    }
+  }
+  
+  .skip-link {
+    display: none;
+  }
+}

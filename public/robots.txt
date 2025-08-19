@@ -1,4 +1,31 @@
-# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for WanderEvents
+# https://wanderevents.pl
+
 User-agent: *
 Allow: /
+
+# Allow all language versions
+Allow: /ru/
+Allow: /en/
+Allow: /pl/
+
+# Allow important static assets
+Allow: /static/
+Allow: /assets/
+Allow: /manifest.json
+Allow: /favicon.ico
+Allow: /sitemap.xml
+
+# Block common unwanted paths
+Disallow: /build/
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /*.json$
+Disallow: /*.map$
+
+# Sitemap location
 Sitemap: https://wanderevents.pl/sitemap.xml
+
+# Crawl delay for respectful crawling
+Crawl-delay: 1

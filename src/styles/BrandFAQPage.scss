@@ -1,0 +1,171 @@
+// Brand FAQ Page Styles
+.brand-faq-page {
+  min-height: 100vh;
+  padding: 120px 0 80px 0;
+  background: var(--color-background-primary, #1a1a1a);
+  color: var(--color-text-primary, #ffffff);
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .faq-header {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    .faq-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #ff6b35, #f7931e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      
+      @media (max-width: 768px) {
+        font-size: 2.2rem;
+      }
+    }
+
+    .faq-intro {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      
+      @media (max-width: 768px) {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .faq-content {
+    margin-bottom: 3rem;
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .faq-question {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 0;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ff6b35;
+        
+        @media (max-width: 768px) {
+          font-size: 1.2rem;
+          padding: 1.2rem;
+        }
+      }
+
+      .faq-answer {
+        padding: 1.5rem;
+        
+        @media (max-width: 768px) {
+          padding: 1.2rem;
+        }
+
+        div {
+          font-size: 1.1rem;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.9);
+          
+          @media (max-width: 768px) {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+
+    .no-faq {
+      text-align: center;
+      font-size: 1.2rem;
+      opacity: 0.6;
+      padding: 2rem;
+    }
+  }
+
+  .faq-footer {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+
+    .brand-mention {
+      font-size: 1rem;
+      line-height: 1.8;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.8);
+
+      strong {
+        color: #ff6b35;
+        font-weight: 700;
+      }
+      
+      @media (max-width: 768px) {
+        font-size: 0.9rem;
+        padding: 0 0.5rem;
+      }
+    }
+  }
+}
+
+// Dark theme adjustments
+@media (prefers-color-scheme: dark) {
+  .brand-faq-page {
+    background: var(--color-background-primary, #0a0a0a);
+  }
+}
+
+// Light theme adjustments  
+@media (prefers-color-scheme: light) {
+  .brand-faq-page {
+    background: var(--color-background-primary, #f8f9fa);
+    color: var(--color-text-primary, #1a1a1a);
+
+    .faq-content .faq-item {
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.2);
+      }
+
+      .faq-question {
+        background: rgba(0, 0, 0, 0.02);
+        border-bottom-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .faq-answer div {
+        color: rgba(0, 0, 0, 0.8);
+      }
+    }
+
+    .faq-footer {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: rgba(0, 0, 0, 0.1);
+
+      .brand-mention {
+        color: rgba(0, 0, 0, 0.7);
+      }
+    }
+  }
+}

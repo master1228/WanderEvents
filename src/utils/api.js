@@ -3,6 +3,28 @@
 
 import tokenManager from './tokenManager';
 
+// Функция для получения текущего языка пользователя
+const getCurrentLanguage = () => {
+  // Пробуем получить язык из localStorage (i18next сохраняет туда)
+  const savedLang = localStorage.getItem('i18nextLng');
+  if (savedLang && ['ru', 'en', 'pl'].includes(savedLang)) {
+    return savedLang;
+  }
+
+  // Определяем по языку браузера
+  const browserLang = navigator.language || navigator.languages[0];
+  const langCode = browserLang.toLowerCase().split('-')[0];
+  
+  const supportedLanguages = ['ru', 'en', 'pl'];
+  
+  if (supportedLanguages.includes(langCode)) {
+    return langCode;
+  }
+  
+  // Fallback на русский
+  return 'ru';
+};
+
 // Try to load local dev override first (only in development)
 let localConfig = null;
 if (process.env.NODE_ENV !== 'production') {
@@ -27,7 +49,7 @@ console.log('Strapi API Configuration:', {
   DYNAMIC_REMOTE_URL: 'Enabled (from server config)',
 });
 
-export async function strapiFetch(endpoint, { method = 'GET', body } = {}, locale = 'ru') {
+export async function strapiFetch(endpoint, { method = 'GET', body } = {}, locale = getCurrentLanguage()) {
   const separator = endpoint.includes('?') ? '&' : '?';
   const localizedEndpoint = `${endpoint}${separator}locale=${locale}`;
 
@@ -73,14 +95,14 @@ export async function strapiFetch(endpoint, { method = 'GET', body } = {}, local
   throw lastError || new Error('All Strapi servers failed');
 }
 
-// Update fetch functions to accept and pass locale
-export const fetchEvents = (locale) => strapiFetch('/events?populate=*', {}, locale);
+// Update fetch functions to accept and pass locale (автоматически используют текущий язык)
+export const fetchEvents = (locale = getCurrentLanguage()) => strapiFetch('/events?populate=*', {}, locale);
 // Single Types используют единственное число (без 's' в конце)
-export const fetchFooterLinks = (locale) => strapiFetch('/ftr?populate=*', {}, locale);
-export const fetchSocialLinks = (locale) => strapiFetch('/scl?populate=*', {}, locale);
-export const fetchVideo = (locale) => strapiFetch('/video?populate=*', {}, locale);
-export const fetchAbout = (locale) => strapiFetch('/abou?populate=*', {}, locale);
-export const fetchAgreement = (locale) => strapiFetch('/agr?populate=*', {}, locale);
+export const fetchFooterLinks = (locale = getCurrentLanguage()) => strapiFetch('/ftr?populate=*', {}, locale);
+export const fetchSocialLinks = (locale = getCurrentLanguage()) => strapiFetch('/scl?populate=*', {}, locale);
+export const fetchVideo = (locale = getCurrentLanguage()) => strapiFetch('/video?populate=*', {}, locale);
+export const fetchAbout = (locale = getCurrentLanguage()) => strapiFetch('/abou?populate=*', {}, locale);
+export const fetchAgreement = (locale = getCurrentLanguage()) => strapiFetch('/agr?populate=*', {}, locale);
 // Additional helpers can be added here (e.g., fetchSingleEvent, createTicket, etc.)
 
 export async function getStrapiBaseUrl() {
