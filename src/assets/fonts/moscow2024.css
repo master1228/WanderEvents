@@ -1,0 +1,14 @@
+/* Moscow2024 Digital Font */
+@font-face {
+  font-family: 'Moscow2024';
+  src: url('https://fonts-online.ru/uploads/fonts/moscow2024/moscow2024.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Fallback для случаев, когда шрифт не загрузится */
+.moscow2024-font {
+  font-family: 'Moscow2024', 'Courier New', 'Monaco', 'Lucida Console', monospace;
+  font-feature-settings: 'tnum' 1; /* Табличные цифры для лучшего выравнивания */
+}

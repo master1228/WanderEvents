@@ -47,6 +47,14 @@
   },
   "loading": "Загрузка...",
   "scroll_down": "прокрутить вниз",
+  "countdown": {
+    "days": "ДНЕЙ",
+    "hours": "ЧАСОВ", 
+    "minutes": "МИНУТ",
+    "seconds": "СЕКУНД",
+    "hours_until_event": "ЧАСОВ ДО СОБЫТИЯ",
+    "next_event": "ДО СЛЕДУЮЩЕГО СОБЫТИЯ"
+  },
   "side_menu": {
     "title": "МЕНЮ"
   },

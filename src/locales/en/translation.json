@@ -45,6 +45,14 @@
   },
   "loading": "Loading...",
   "scroll_down": "scroll down",
+  "countdown": {
+    "days": "DAYS",
+    "hours": "HOURS",
+    "minutes": "MINUTES", 
+    "seconds": "SECONDS",
+    "hours_until_event": "HOURS UNTIL EVENT",
+    "next_event": "UNTIL NEXT EVENT"
+  },
   "side_menu": {
     "title": "MENU"
   },

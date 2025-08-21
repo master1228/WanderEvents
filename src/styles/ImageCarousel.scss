@@ -1,0 +1,153 @@
+// Image Carousel Styles
+.image-carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1; // Квадратные изображения
+  border-radius: 8px;
+  overflow: hidden;
+  
+  &.single-image {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .carousel-main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; // Важно: скрываем любые выходящие за границы элементы
+    touch-action: pan-y; // Позволяет вертикальную прокрутку, но блокирует горизонтальную
+    clip-path: inset(0); // Дополнительная защита от переполнения
+  }
+
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    // width и transition добавляются динамически через style в JSX
+  }
+
+  .carousel-slide {
+    flex: 0 0 auto;
+    height: 100%;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none; // Предотвращаем выделение изображения при свайпе
+      pointer-events: none; // Предотвращаем взаимодействие с изображением
+    }
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    backdrop-filter: blur(4px);
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    &.carousel-arrow-left {
+      left: 8px;
+    }
+
+    &.carousel-arrow-right {
+      right: 8px;
+    }
+  }
+
+  // Показываем стрелки при наведении на карусель
+  &:hover .carousel-arrow {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.8);
+      transform: scale(1.2);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      background: rgba(255, 255, 255, 0.9);
+      transform: scale(1.3);
+    }
+  }
+
+  // Адаптивность для мобильных устройств
+  @media (max-width: 768px) {
+    .carousel-arrow {
+      font-size: 1rem;
+      padding: 8px;
+      
+      &.carousel-arrow-left {
+        left: 6px;
+      }
+
+      &.carousel-arrow-right {
+        right: 6px;
+      }
+    }
+
+    .carousel-dots {
+      bottom: 6px;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+    }
+  }
+}
+
+// Дополнительные стили для интеграции с merch-card
+.merch-card .image-carousel {
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}

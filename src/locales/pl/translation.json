@@ -46,7 +46,15 @@
     "agreement_modal_missing_translation": "Nie znaleziono tłumaczenia."
   },
   "loading": "Ładowanie...",
-  "scroll_down": "przewiń w dół",
+  "scroll_down": "przewiń w dół", 
+  "countdown": {
+    "days": "DNI",
+    "hours": "GODZIN",
+    "minutes": "MINUT",
+    "seconds": "SEKUND", 
+    "hours_until_event": "GODZIN DO WYDARZENIA",
+    "next_event": "DO NASTĘPNEGO WYDARZENIA"
+  },
   "side_menu": {
     "title": "MENU"
   },

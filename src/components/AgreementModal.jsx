@@ -46,8 +46,8 @@ const AgreementModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
-      <div className="ticket-modal">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="ticket-modal" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>×</button>
         <div className="modal-content">
           <h2>{t('agreement_modal.agreement_title')}</h2>

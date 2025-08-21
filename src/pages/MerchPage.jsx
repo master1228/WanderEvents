@@ -2,6 +2,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '../context/LanguageContext';
 import { fetchMerchItems } from '../utils/api';
+import { FaChevronDown } from 'react-icons/fa';
+import ImageCarousel from '../components/ImageCarousel';
 import '../styles/MerchPage.scss';
 
 const MerchPage = () => {
@@ -96,21 +98,19 @@ const MerchPage = () => {
     }
   };
 
+  // Функция для прокрутки к товарам
+  const scrollToMerch = () => {
+    const section = document.querySelector('.merch-filters');
+    if (section) section.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="merch-page">
-      <div className="merch-hero">
-        <h1 className="merch-title">
-          {locale === 'ru' && 'Официальный мерч WanderEvents'}
-          {locale === 'en' && 'Official WanderEvents Merchandise'}
-          {locale === 'pl' && 'Oficjalny merch WanderEvents'}
-        </h1>
-        <p className="merch-subtitle">
-          {locale === 'ru' && 'Покажи свою любовь к музыке стильно'}
-          {locale === 'en' && 'Show your love for music in style'}
-          {locale === 'pl' && 'Pokaż swoją miłość do muzyki w stylu'}
-        </p>
+      <div className="scroll-indicator" onClick={scrollToMerch} role="button">
+        <div className="scroll-text">{t('scroll_down')}</div>
+        <FaChevronDown className="scroll-arrow" />
       </div>
-
+      
       <div className="merch-filters">
         <div className="filter-group" data-locale={locale}>
           <button 
@@ -222,12 +222,10 @@ const MerchPage = () => {
             )}
             
             <div className="merch-image">
-              <img 
-                src={item.image} 
+              <ImageCarousel 
+                images={item.images} 
                 alt={item.name[locale]}
-                onError={(e) => {
-                  e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1lcmNoIEltYWdlPC90ZXh0Pjwvc3ZnPg==';
-                }}
+                className="merch-carousel"
               />
               {!item.inStock && (
                 <div className="stock-overlay">

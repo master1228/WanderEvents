@@ -1,4 +1,6 @@
 // Merch Page Styles
+@import './ImageCarousel.scss';
+
 .merch-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
@@ -21,90 +23,84 @@
     outline: none !important;
   }
 
-  .merch-hero {
-    text-align: center;
-    height: 1200px; /* Увеличиваем высоту на 200px для размещения опущенного текста */
-    width: 100%;
+  .scroll-indicator {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 400px 0 50px; /* Увеличиваем верхний отступ еще на 200px (было 200px, стало 400px) */
-    position: relative;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    position: absolute;
+    top: 590px; // fixed distance 590px from top как на главной
+    left: 0;
+    right: 0;
+    animation: bounce 2s infinite;
+    z-index: 2;
     
-    .merch-title {
-      font-size: 3.5rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 
-                   0 0 20px rgba(0, 0, 0, 0.6);
-      -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      padding: 0 10px; /* Добавляем боковые отступы по 10px */
-
-      @media (max-width: 768px) {
-        font-size: 2.5rem;
-        padding: 0 10px; /* Боковые отступы на планшетах */
-      }
-
-      @media (max-width: 480px) {
-        font-size: 2rem;
-        padding: 0 10px; /* Боковые отступы на телефонах */
-      }
+    &:hover {
+      opacity: 1;
     }
-
-     .merch-subtitle {
-       font-size: 1.2rem;
-       color: rgba(255, 255, 255, 0.8);
-       font-weight: 300;
-       letter-spacing: 0.5px;
-       text-align: center;
-       padding: 0 10px; /* Добавляем боковые отступы по 10px */
-
-       @media (max-width: 768px) {
-         font-size: 1rem;
-         padding: 0 10px; /* Боковые отступы на планшетах */
-       }
-       
-       @media (max-width: 480px) {
-         padding: 0 10px; /* Боковые отступы на телефонах */
-       }
-     }
-
-     // Responsive styles для hero секции как на главной
-     @media (max-width: 768px) {
-       height: 1000px; /* Увеличиваем высоту для размещения опущенного текста */
-       padding: 380px 0 40px; /* Увеличиваем верхний отступ еще на 200px */
-     }
-
-     @media (max-width: 480px) {
-       height: 900px; /* Увеличиваем высоту для размещения опущенного текста */
-       padding: 360px 0 30px; /* Увеличиваем верхний отступ еще на 200px */
-     }
-   }
+    
+    .scroll-text {
+      font-size: 1rem;
+      color: var(--color-secondary);
+      text-transform: lowercase;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .scroll-arrow {
+      font-size: 2rem;
+      color: var(--color-secondary);
+      opacity: 0.7;
+    }
+    
+    @media (max-width: 768px) {
+      top: 500px; // уменьшаем для планшетов
+    }
+    
+    @media (max-width: 480px) {
+      top: 450px; // уменьшаем для телефонов
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
 
   .merch-filters {
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem; /* Уменьшаем отступ снизу (было 3rem, стало 1rem) */
-    margin-top: -10rem; /* Увеличиваем расстояние до заголовка (было -14rem, стало -10rem) */
-    padding: 0 20px; /* Те же отступы что у events-list */
+    margin-bottom: 1rem;
+    margin-top: 1000px; /* Увеличиваем отступ до 1000px для максимального эффекта */
+    padding: 0 20px;
     
     @media (max-width: 768px) {
+      margin-top: 950px; /* Увеличиваем отступ для планшетов */
       padding: 0 30px; /* Увеличиваем боковые отступы на планшетах */
     }
     
     @media (max-width: 480px) {
+      margin-top: 900px; /* Увеличиваем отступ для телефонов */
       padding: 0 30px; /* Увеличиваем боковые отступы на телефонах (было 20px + 10px) */
     }
     
     @media (max-width: 375px) {
+      margin-top: 880px; /* Увеличиваем отступ для маленьких телефонов */
       padding: 0 30px; /* Отступы для маленьких телефонов (было 20px + 10px) */
     }
     
     @media (max-width: 320px) {
+      margin-top: 860px; /* Увеличиваем отступ для очень маленьких экранов */
       padding: 0 25px; /* Минимальные отступы для очень маленьких экранов (было 20px + 5px) */
     }
 
@@ -503,9 +499,10 @@
       border-color: rgba(255, 107, 53, 0.2);
       background: rgba(255, 255, 255, 0.04);
 
-      .merch-image img {
-        transform: scale(1.02);
-      }
+      // Убираем масштабирование изображений в карусели, чтобы не показывались соседние
+      // .merch-image .merch-carousel .carousel-slide img {
+      //   transform: scale(1.02);
+      // }
     }
 
     &.out-of-stock {
@@ -540,24 +537,13 @@
 
     .merch-image {
       width: 100%;
-      aspect-ratio: 4/3; /* Соотношение сторон как у постера */
       margin-bottom: 1rem;
-      border-radius: 8px;
-      overflow: hidden;
       position: relative;
       flex-shrink: 0; /* Предотвращаем сжатие изображения */
       
-      /* Fallback для браузеров без поддержки aspect-ratio */
-      @supports not (aspect-ratio: 4/3) {
-        height: 0;
-        padding-bottom: 75%; /* 3/4 = 0.75 = 75% для соотношения 4:3 */
-      }
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
+      .merch-carousel {
+        border-radius: 8px;
+        overflow: hidden;
       }
 
       .stock-overlay {

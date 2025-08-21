@@ -10,8 +10,8 @@ const TicketModal = ({ isOpen, onClose, event }) => {
   const tickets = event.tickets || (event.localizations && event.localizations[0]?.tickets) || [];
 
   return (
-    <div className="modal-overlay">
-      <div className="ticket-modal">
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="ticket-modal" onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={onClose}>×</button>
         
         <div className="modal-content">

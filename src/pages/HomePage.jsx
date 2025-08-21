@@ -81,6 +81,8 @@ const HomePage = () => {
     loadEvents();
   }, [locale]);
 
+
+
   useEffect(() => {
     // Only scroll if the navigation state is set AND the events have been loaded.
     if (location.state?.scrollToEvents && eventsRef.current && events.length > 0) {

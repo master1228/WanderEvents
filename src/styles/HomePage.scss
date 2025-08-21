@@ -126,12 +126,15 @@
     width: 100%;             // 20% wider than previous 90%
     max-width: 1080px;       // increased cap for large screens
     margin: 0 auto 50px;     // center horizontally and bottom spacing
-    background-color: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 30px; /* More rounded corners like header */
     overflow: hidden;
     padding: 30px;
     box-sizing: border-box;
     transform: translateX(0); /* Center card */
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
     
     .event-concert-title {
       font-size: clamp(2.2rem, 6vw, 3.2rem); // adapt with viewport
@@ -159,6 +162,7 @@
         border-radius: 5px;
         flex-shrink: 0;
         border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease;
       }
       
       .event-middle-content {
@@ -287,6 +291,17 @@
         font-size: 0.9rem;
         text-align: left; /* Match description alignment */
         padding: 10px 0;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 107, 53, 0.2);
+      background: rgba(255, 255, 255, 0.04);
+
+      .event-poster {
+        transform: scale(1.02);
       }
     }
     

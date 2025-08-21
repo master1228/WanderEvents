@@ -145,6 +145,13 @@ export const fetchMerchItems = async (locale = getCurrentLanguage(), category = 
         const description = itemData.description;
         const colors = itemData.available_colors;
         
+        // Создаем массив изображений, фильтруя пустые значения
+        const images = [
+          itemData.image_url,
+          itemData.image2_url, 
+          itemData.image3_url
+        ].filter(url => url && url.trim() !== '');
+
         const processedItem = {
           id: item.id,
           name: typeof name === 'object' ? name : {
@@ -160,6 +167,7 @@ export const fetchMerchItems = async (locale = getCurrentLanguage(), category = 
           price: itemData.price || 0,
           currency: itemData.currency || '€',
           image: itemData.image_url || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1lcmNoIEltYWdlPC90ZXh0Pjwvc3ZnPg==',
+          images: images.length > 0 ? images : ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1lcmNoIEltYWdlPC90ZXh0Pjwvc3ZnPg=='],
           availableColors: typeof colors === 'object' ? colors : {
             ru: colors || '',
             en: colors || '',
@@ -205,6 +213,13 @@ export const fetchMerchItem = async (id, locale = getCurrentLanguage()) => {
       const description = itemData.description;
       const colors = itemData.available_colors;
       
+      // Создаем массив изображений, фильтруя пустые значения
+      const images = [
+        itemData.image_url,
+        itemData.image2_url, 
+        itemData.image3_url
+      ].filter(url => url && url.trim() !== '');
+      
       return {
         id: data.id,
         name: typeof name === 'object' ? name : {
@@ -220,6 +235,7 @@ export const fetchMerchItem = async (id, locale = getCurrentLanguage()) => {
         price: itemData.price || 0,
         currency: itemData.currency || '€',
         image: itemData.image_url || 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1lcmNoIEltYWdlPC90ZXh0Pjwvc3ZnPg==',
+        images: images.length > 0 ? images : ['data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1lcmNoIEltYWdlPC90ZXh0Pjwvc3ZnPg=='],
         availableColors: typeof colors === 'object' ? colors : {
           ru: colors || '',
           en: colors || '',
@@ -239,6 +255,42 @@ export const fetchMerchItem = async (id, locale = getCurrentLanguage()) => {
   } catch (error) {
     console.error('Error fetching merch item:', error);
     return null;
+  }
+};
+
+// Функция для получения конфигурации таймера из Strapi
+export const fetchCountdownConfig = async (locale = getCurrentLanguage()) => {
+  const endpoint = '/countdown-config';
+  
+  try {
+    console.log(`Fetching countdown config: ${endpoint}`);
+    const data = await strapiFetch(endpoint, {}, locale);
+    
+    if (!data || !data.data) {
+      console.warn('No countdown config found, using defaults');
+      return {
+        targetDate: null,
+        isVisible: false,
+        title: null
+      };
+    }
+
+    const configData = data.data.attributes || data.data;
+    
+    return {
+      targetDate: configData.target_date || null,
+      isVisible: configData.is_visible || false,
+      title: configData.title || null
+    };
+
+  } catch (error) {
+    console.error('Error fetching countdown config:', error);
+    // Возвращаем дефолтную конфигурацию при ошибке
+    return {
+      targetDate: null,
+      isVisible: false,
+      title: null
+    };
   }
 };
 

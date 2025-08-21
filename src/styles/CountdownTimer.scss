@@ -1,0 +1,386 @@
+// Dynamic Island Timer Styles
+.dynamic-island {
+  position: fixed;
+  top: 120px; // Опустили еще на 20px ниже
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999; // Увеличили z-index для мобильных устройств
+  cursor: pointer;
+  
+  // Основной стиль острова
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  // Transition для плавного изменения размеров
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Компактный режим
+  &.compact {
+    width: 240px; // Увеличиваем ширину для "LIVE"
+    height: 40px;
+    border-radius: 20px;
+    
+    .compact-timer {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .expanded-content {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.95);
+      pointer-events: none;
+    }
+  }
+  
+  // Расширенный режим
+  &.expanded {
+    width: 320px;
+    height: 160px; // Фиксированная высота для плавной анимации
+    border-radius: 24px;
+    
+    .compact-timer {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    
+    .expanded-content {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+  }
+  
+  // Hover эффект
+  &:hover {
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 107, 53, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    
+    &.compact {
+      transform: translateX(-50%) scale(1.05);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    top: 90px; // Опустили планшеты на 10px ниже
+    
+    &.compact {
+      width: 200px;
+      height: 36px;
+    }
+    
+    &.expanded {
+      width: 280px;
+      height: 140px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    top: 90px; // Опустили мобильные телефоны еще на 10px ниже
+    backdrop-filter: blur(15px) saturate(160%); // Немного меньше blur на мобильных
+    
+    &.compact {
+      width: 170px; // Немного уже для маленьких экранов
+      height: 30px; // Немного ниже для маленьких экранов
+    }
+    
+    &.expanded {
+      width: 250px; // Немного уже для маленьких экранов
+      height: 110px; // Немного ниже для маленьких экранов
+    }
+  }
+  
+  @media (max-width: 360px) {
+    top: 80px; // Опустили очень маленькие экраны еще на 10px ниже
+    
+    &.compact {
+      width: 160px;
+      height: 28px;
+    }
+    
+    &.expanded {
+      width: 240px;
+      height: 100px;
+    }
+  }
+}
+
+// Содержимое острова
+.island-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+}
+
+// Компактный таймер с LIVE
+.compact-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #ff6b35;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+  
+  .live-indicator {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    
+    @media (max-width: 768px) {
+      font-size: 0.7rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 0.6rem;
+    }
+    
+    @media (max-width: 360px) {
+      font-size: 0.55rem;
+      letter-spacing: 0.3px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    gap: 0.4rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+    gap: 0.25rem;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 0.8rem;
+    gap: 0.2rem;
+  }
+}
+
+// Расширенное содержимое
+.expanded-content {
+  position: absolute;
+  top: 30px; // Смещение элементов на 30px вниз
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; // Выравнивание по верхнему краю смещенной области
+  gap: 0.6rem; // Уменьшенные отступы
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &.hidden {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    pointer-events: none;
+  }
+  
+  &.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  
+  @media (max-width: 480px) {
+    top: 20px; // Меньше смещение на мобильных
+    padding: 0.6rem 0.8rem; // Меньше padding на мобильных
+    gap: 0.4rem; // Меньше gap на мобильных
+  }
+  
+  @media (max-width: 360px) {
+    top: 15px; // Еще меньше смещение на очень маленьких экранах
+    padding: 0.5rem 0.6rem; // Еще меньше padding
+    gap: 0.3rem; // Еще меньше gap
+  }
+}
+
+// Заголовок в расширенном режиме (под таймером)
+.expanded-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  margin: 0; // Убираем лишние отступы
+  
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 0.55rem;
+    letter-spacing: 0.8px;
+  }
+}
+
+// Таймер в расширенном режиме
+.expanded-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  flex-wrap: nowrap; // Запрещаем перенос строк
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    gap: 0.2rem; // Уменьшаем отступы на мобильных
+  }
+  
+  @media (max-width: 480px) {
+    gap: 0.15rem; // Еще меньше отступы для очень маленьких экранов
+  }
+}
+
+// Секции таймера в расширенном режиме
+.timer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem; // Уменьшенный отступ между цифрой и подписью
+}
+
+.timer-number {
+  color: #ff6b35;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 
+    0 0 10px rgba(255, 107, 53, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.5);
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 0.8rem;
+  }
+}
+
+.timer-separator {
+  color: #ff6b35;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0 0.15rem;
+  animation: blink 2s infinite;
+  text-shadow: 
+    0 0 10px rgba(255, 107, 53, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.5);
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin: 0 0.1rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin: 0 0.06rem;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 0.8rem;
+    margin: 0 0.05rem;
+  }
+}
+
+.timer-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.55rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 0; // Убираем лишние отступы
+  
+  @media (max-width: 768px) {
+    font-size: 0.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 0.42rem;
+    letter-spacing: 0.3px;
+  }
+  
+  @media (max-width: 360px) {
+    font-size: 0.4rem;
+    letter-spacing: 0.2px;
+  }
+}
+
+// Демо информация в расширенном режиме
+.demo-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.demo-hours {
+  color: #ff6b35;
+  font-size: 1.6rem;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 
+    0 0 15px rgba(255, 107, 53, 0.4),
+    0 1px 3px rgba(0, 0, 0, 0.5);
+  
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
+}
+
+.demo-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.6rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  
+  @media (max-width: 480px) {
+    font-size: 0.55rem;
+  }
+}
+
+// Анимации
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0.3;
+  }
+}
