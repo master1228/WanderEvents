@@ -291,52 +291,6 @@ const MerchPage = () => {
         ))}
         </div>
       )}
-
-      <div className="merch-info-section">
-        <div className="info-cards">
-          <div className="info-card">
-            <div className="info-icon">🚚</div>
-            <h4>
-              {locale === 'ru' && 'Быстрая доставка'}
-              {locale === 'en' && 'Fast Shipping'}
-              {locale === 'pl' && 'Szybka dostawa'}
-            </h4>
-            <p>
-              {locale === 'ru' && 'Доставка по всей Европе за 3-5 дней'}
-              {locale === 'en' && 'Europe-wide delivery in 3-5 days'}
-              {locale === 'pl' && 'Dostawa w całej Europie w ciągu 3-5 dni'}
-            </p>
-          </div>
-          
-          <div className="info-card">
-            <div className="info-icon">💎</div>
-            <h4>
-              {locale === 'ru' && 'Высокое качество'}
-              {locale === 'en' && 'Premium Quality'}
-              {locale === 'pl' && 'Wysoka jakość'}
-            </h4>
-            <p>
-              {locale === 'ru' && 'Только лучшие материалы и принты'}
-              {locale === 'en' && 'Only the finest materials and prints'}
-              {locale === 'pl' && 'Tylko najlepsze materiały i nadruki'}
-            </p>
-          </div>
-          
-          <div className="info-card">
-            <div className="info-icon">🔄</div>
-            <h4>
-              {locale === 'ru' && 'Легкий возврат'}
-              {locale === 'en' && 'Easy Returns'}
-              {locale === 'pl' && 'Łatwe zwroty'}
-            </h4>
-            <p>
-              {locale === 'ru' && '30 дней на возврат без вопросов'}
-              {locale === 'en' && '30-day no-questions-asked returns'}
-              {locale === 'pl' && '30-dniowe zwroty bez pytań'}
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

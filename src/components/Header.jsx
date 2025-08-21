@@ -23,7 +23,7 @@ const Header = () => {
         <nav className="header__nav header__nav-right">
           <ul className="header__nav-list">
             <li className="header__nav-item">
-              <Link to="/welcome" className="header__nav-link">{t('header.contacts')}</Link>
+              <Link to="/merch" className="header__nav-link">{t('header.merch')}</Link>
             </li>
           </ul>
         </nav>

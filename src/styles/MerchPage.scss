@@ -714,54 +714,7 @@
     }
   }
 
-  .merch-info-section {
-    max-width: 1200px;
-    margin: 0 auto;
 
-    .info-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-
-      @media (max-width: 768px) {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-    }
-
-    .info-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 2rem;
-      text-align: center;
-      transition: all 0.3s ease;
-
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(255, 107, 53, 0.1);
-        border-color: rgba(255, 107, 53, 0.2);
-      }
-
-      .info-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-      }
-
-      h4 {
-        font-size: 1.3rem;
-        color: #ffffff;
-        margin-bottom: 1rem;
-        font-weight: 600;
-      }
-
-      p {
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        font-size: 0.95rem;
-      }
-    }
-  }
 
   // Loading animations
   @keyframes fadeInUp {
